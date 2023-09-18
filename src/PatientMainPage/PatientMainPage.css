@@ -1,16 +1,16 @@
-/* DoctorMainPage.css */
+/* PatientMainPage.css */
 
-.doctor-main-page {
+.patient-main-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
   
-  .navbar-D {
+  .navbar-P {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background-color: #1e5aa5; /* Add your desired background color */
+    background-color: #629c44; /* Add your desired background color */
     color: white; /* Add your desired text color */
     margin-bottom: 40px;
   }

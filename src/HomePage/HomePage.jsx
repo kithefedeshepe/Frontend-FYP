@@ -5,13 +5,16 @@ function HomePage() {
   return (
     <div className="homepage">
       <main>
+      <h2 className="h2">WELCOME</h2>
         <section className="login-container">
-          <h2>Welcome to My App</h2>
-          <p>Please log in to access the features.</p>
+          <div className="left-box">
+            {/* Content for the left box */}
+          </div>
           <form className="login-form">
+          <p>COVID-19 Imaging Recognition System</p>
             <input type="text" className="login-input" placeholder="Username" />
             <input type="password" className="login-input" placeholder="Password" />
-            <button type="submit" className="button-32">Login</button>
+            <button type="submit" className="login-button">Login</button>
           </form>
         </section>
       </main>

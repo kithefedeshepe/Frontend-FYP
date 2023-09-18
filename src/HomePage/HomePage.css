@@ -9,21 +9,41 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-image: url('C:\Users\Keith\OneDrive\Desktop\FYP\ReactJS app\frontend\public\covid_backgrd.jpg');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center;
+}
+
+.h2 {
+  font-size: 40px;
+  margin-top: 0;
+  text-align: center;
+  color: #1e5aa5;
 }
 
 /* Style for the login form container */
 .login-container {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 300px;
+  width: 500px;
+  height: 300px;
+  display: flex;
+  align-items: center; 
 }
 
-.login-container h2 {
-  font-size: 24px;
-  margin-top: 0;
+.left-box {
+  flex: 1; /* Occupy 50% of the available space */
+  background-color: #f0f0f0; /* Change this to your desired background color */
+  padding: 20px; /* Add padding for spacing */
+  box-sizing: border-box; /* Include padding in the width */
+  height: 100%;
+  background-image: url('C:\Users\Keith\OneDrive\Desktop\FYP\ReactJS app\frontend\public\CNN.jpg');
+  background-size: 200%;
+  background-position: center;
 }
 
 .login-container p {
@@ -35,7 +55,10 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+  flex: 1; /* Occupy 50% of the available space */
+  padding: 20px; /* Add padding for spacing */
+  box-sizing: border-box; /* Include padding in the width */
 }
 
 .login-input {
@@ -47,11 +70,13 @@
 
 .login-button {
   background-color: #333;
-  color: #fff;
+  color: #ffffff;
+  background-color: #1e5aa5;
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+  width: 110%;
 }
 
