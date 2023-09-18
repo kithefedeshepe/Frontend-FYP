@@ -4,15 +4,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //Login, homepage
 import HomePage from "./HomePage/HomePage";
-
 //DoctorMainPage
 import DoctorMainPage from "./DoctorMainPage/DoctorMainPage";
-
 //DoctorUploadPage
 import DoctorUploadPage from "./DoctorUploadPage/DoctorUploadPage";
-
 //DoctorViewResult
 import DoctorViewResult from "./DoctorViewResult/DoctorViewResult";
+//PatientViewReport
+import PatientViewReport from "./PatientViewReport/PatientViewReport";
+//PatientMainPage
+import PatientMainPage from "./PatientMainPage/PatientMainPage";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="/DoctorMainPage" element={<DoctorMainPage />} />
-				<Route path="/DoctorUploadImage/doc-upload-image" element={<DoctorUploadPage />} />
-				<Route path="/UserAdminPage/doc-view-result" element={<DoctorViewResult />} />
-
+				<Route path="/DoctorUploadImage" element={<DoctorUploadPage />} />
+				<Route path="/DoctorViewResult" element={<DoctorViewResult />} />
+				<Route path="/PatientMainPage" element={<PatientMainPage />} />
+				<Route path="/PatientViewReport" element={<PatientViewReport />} />
 			</Routes>
 		</Router>
   );

@@ -11,7 +11,7 @@ function HomePage() {
           <form className="login-form">
             <input type="text" className="login-input" placeholder="Username" />
             <input type="password" className="login-input" placeholder="Password" />
-            <button type="submit" className="login-button">Login</button>
+            <button type="submit" className="button-32">Login</button>
           </form>
         </section>
       </main>
