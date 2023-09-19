@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './PatientMainPage.css'; // Import your CSS file
 
 function PatientMainPage() {
+  const [reports, setReports] = useState([]); // Initialize an empty array for reports
+  // Use useEffect to fetch data when the component mounts
+  /*  useEffect(() => {
+      axios.get('')
+        .then(response => {
+          const data = response.data;
+          setReports(data); // Update the state with fetched data
+        })
+        .catch(error => {
+          console.error('There was an error!', error);
+        });
+    }, []);*/
   return (
     <div className="patient-main-page">
       <div className="navbar-P">
-        <div className="menu-button">Menu</div>
+        {/* <div className="menu-button">Menu</div> */}
         <div className="header-text">COVID-19 Imaging System</div>
         <div className="right-text">Patient name</div>
         <div className="dropdown-button">Dropdown</div>
@@ -15,46 +28,55 @@ function PatientMainPage() {
         <input type="text" placeholder="Search..." />
             <div className="filter-dropdown">
                 <select>
-                <option value="">Filters</option>
                 <option value="option1">Report ID</option>
                 <option value="option2">Doctor name</option>
                 <option value="option3">Date created</option>
                 <option value="option4">status</option>
                 </select>
             </div>
-    </div>
+      </div>
     
       <div className="table-container">
         <table className="data-table">
-            <thead>
+          <thead>
             <tr>
                 <th>Report ID</th>
-                <th>Doctor name</th>
+                <th>Doctor ID</th>
                 <th>Email</th>
                 <th>Date created</th>
-                <th>status</th>
+                <th>Status</th>
                 <th>Due date</th>
-                <th></th>
+                <th>Visibility</th>
+              <th></th>
             </tr>
-            </thead>
-            <tbody>
-            {/* 11 rows */}
-            <tr>
-                <td>Data 1</td>
-                <td>Data 2</td>
-                <td>Data 3</td>
-                <td>Data 4</td>
-                <td>Data 5</td>
-                <td>Data 6</td>
-                <td>Data 7</td>
-                
-            </tr>
-            <tr>
-                {/* Add more rows with similar structure */}
-            </tr>
-            </tbody>
+          </thead>
+          <tbody>
+          <tr>
+            <td>RID123</td>
+            <td>Johnny signs</td>
+            <td>johnnysigns@email.com</td>
+            <td>19/9/23</td>
+            <td>Negative</td>
+            <td>23/9/23</td>
+            <td>Visibile</td>
+            <td></td>
+          </tr>
+            {reports.map(report => (
+              <tr key={report.id}>
+                <td>{report.reportId}</td>
+                <td>{report.patientId}</td>
+                <td>{report.patientName}</td>
+                <td>{report.email}</td>
+                <td>{report.dateCreated}</td>
+                <td>{report.status}</td>
+                <td>{report.dateReviewed}</td>
+                <td>{report.visibility}</td>
+                <td>{/* Your additional data fields here */}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-    </div>
+      </div>
     </div>
   );
 }
