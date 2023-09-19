@@ -18,10 +18,26 @@ function PatientMainPage() {
   return (
     <div className="patient-main-page">
       <div className="navbar-P">
-        {/* <div className="menu-button">Menu</div> */}
-        <div className="header-text">COVID-19 Imaging System</div>
-        <div className="right-text">Patient name</div>
-        <div className="dropdown-button">Dropdown</div>
+      <div class="dropdown">
+          <button class="dropbtn">Menu
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <b href="#">Home</b>
+            <b href="#">Upload</b>
+          </div>
+        </div>
+        <div className="header">COVID-19 Imaging System</div>
+        <div className="drName">Dr Johnny</div>
+        <div class="dropdown">
+          <button class="dropbtn">Options
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <b href="#">Profile</b>
+            <b href="#">Logout</b>
+          </div>
+        </div>
       </div>
 
       <div className="search-bar">

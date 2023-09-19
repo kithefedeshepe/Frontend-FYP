@@ -19,12 +19,29 @@ function DoctorMainPage() {
   return (
     <div className="doctor-main-page">
       <div className="navbar-D">
-        {/* <div className="menu-button">Menu</div> */}
-        <div className="header-text">COVID-19 Imaging System</div>
-        <div className="right-text">Doctor name</div>
-        <div className="dropdown-button">Dropdown</div>
+        <div class="dropdown">
+          <button class="dropbtn">Menu
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Home</a>
+            <a href="#">Upload</a>
+          </div>
+        </div>
+        <div className="header">COVID-19 Imaging System</div>
+        <div className="drName">Dr Johnny</div>
+        <div class="dropdown">
+          <button class="dropbtn">Options
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
       </div>
-
+      
+     
       <div className="search-bar">
         <input type="text" placeholder="Search..." />
             <div className="filter-dropdown">
