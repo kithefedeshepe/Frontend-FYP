@@ -28,7 +28,7 @@ function PatientMainPage() {
           </div>
         </div>
         <div className="header">COVID-19 Imaging System</div>
-        <div className="drName">Dr Johnny</div>
+        <div className="patientName">Jane Doe</div>
         <div class="dropdown">
           <button class="dropbtn">Options
             <i class="fa fa-caret-down"></i>
