@@ -1,0 +1,95 @@
+/* PatientViewReport.css */
+
+.patient-view-report {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .navbar-P {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: #629c44; 
+    color: white; 
+    margin-bottom: 40px;
+    align-items: center;
+  }
+
+  /* Links inside the navbar */
+.navbar b {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; 
+  margin: 0; 
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar b:hover, .dropdown:hover .dropbtn {
+  background-color: rgb(0, 0, 0); 
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-weight: normal;
+}
+
+/* Links inside the dropdown */
+.dropdown-content b {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-weight: normal;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content b:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+  
+  
+  .header-text {
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 10px;
+  }
+  
+  /* Align right-text and dropdown-button to the right */
+  .patientName {
+    margin-left: auto; 
+  }
+
+  /*ADD ON HERE*/

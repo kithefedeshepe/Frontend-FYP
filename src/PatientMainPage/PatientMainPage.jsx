@@ -23,8 +23,8 @@ function PatientMainPage() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <b href="#">Home</b>
-            <b href="#">Upload</b>
+            <b href="/PatientMainPage">Home</b>
+            <b href="/PatientViewReport">View Report</b>
           </div>
         </div>
         <div className="header">COVID-19 Imaging System</div>
@@ -35,7 +35,7 @@ function PatientMainPage() {
           </button>
           <div class="dropdown-content">
             <b href="#">Profile</b>
-            <b href="#">Logout</b>
+            <b href="/">Logout</b>
           </div>
         </div>
       </div>

@@ -24,8 +24,9 @@ function DoctorMainPage() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="#">Home</a>
-            <a href="#">Upload</a>
+            <a href="/DoctorMainPage">Home</a>
+            <a href="/DoctorUploadPage">Upload</a>
+            <a href="/DoctorViewResult">View Result</a>
           </div>
         </div>
         <div className="header">COVID-19 Imaging System</div>
@@ -36,7 +37,7 @@ function DoctorMainPage() {
           </button>
           <div class="dropdown-content">
             <a href="#">Profile</a>
-            <a href="#">Logout</a>
+            <a href="/">Logout</a>
           </div>
         </div>
       </div>

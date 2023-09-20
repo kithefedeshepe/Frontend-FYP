@@ -10,8 +10,8 @@
   display: flex;
   justify-content: space-between;
   padding: 8px;
-  background-color: #1e5aa5; /* Add your desired background color */
-  color: white; /* Add your desired text color */
+  background-color: #1e5aa5; 
+  color: white; 
   margin-bottom: 40px;
   align-items: center;
 }
@@ -40,8 +40,8 @@
   color: white;
   padding: 14px 16px;
   background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
+  font-family: inherit; 
+  margin: 0; 
 }
 
 /* Add a red background color to navbar links on hover */
@@ -93,14 +93,14 @@
 
 /* Style for the main content area */
 .content {
-  margin-left: 250px; /* Adjust to match the sidebar width */
+  margin-left: 250px; 
   padding: 20px;
 }
   
   /* Style the search bar */
   .search-bar {
     padding: 0 30px; 
-    flex-grow: 1; /* Allow it to grow and fill available space */
+    flex-grow: 1; 
     display: flex;
     align-items: center;
     width: 20%;
@@ -108,7 +108,7 @@
   }
   
   .search-bar input[type="text"] {
-    flex-grow: 1; /* Allow the input to grow and fill available space */
+    flex-grow: 1; 
     padding: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -120,12 +120,12 @@
     padding: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 100px; /* Adjust the width as needed */
+    width: 100px; 
     margin-left: 10px;
   }
   
   .filter-dropdown select:focus {
-    outline: none; /* Remove the default focus outline */
+    outline: none; 
   }
   
 /*TABLE */
@@ -134,7 +134,7 @@
     display: flex;
     justify-content: center;
     padding: 0 30px; 
-    max-height: 400px; /* Adjust the height as needed */
+    max-height: 400px; 
     overflow-y: scroll;
   }
 

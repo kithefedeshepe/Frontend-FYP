@@ -36,10 +36,10 @@
 }
 
 .left-box {
-  flex: 1; /* Occupy 50% of the available space */
-  background-color: #f0f0f0; /* Change this to your desired background color */
-  padding: 20px; /* Add padding for spacing */
-  box-sizing: border-box; /* Include padding in the width */
+  flex: 1; 
+  background-color: #f0f0f0; 
+  padding: 20px; 
+  box-sizing: border-box; 
   height: 100%;
   background-image: url('C:\Users\Keith\OneDrive\Desktop\FYP\ReactJS app\frontend\public\CNN.jpg');
   background-size: 200%;
@@ -56,9 +56,9 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  flex: 1; /* Occupy 50% of the available space */
-  padding: 20px; /* Add padding for spacing */
-  box-sizing: border-box; /* Include padding in the width */
+  flex: 1; 
+  padding: 20px; 
+  box-sizing: border-box; 
 }
 
 .login-input {
