@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: url('C:\Users\Keith\OneDrive\Desktop\FYP\ReactJS app\frontend\public\covid_backgrd.jpg');
+  background-image: url('https://images.everydayhealth.com/images/new-covid-variant-is-on-the-rise-1440x810.jpg');
   background-size: cover; 
   background-repeat: no-repeat; 
   background-position: center;
@@ -41,7 +41,7 @@
   padding: 20px; 
   box-sizing: border-box; 
   height: 100%;
-  background-image: url('C:\Users\Keith\OneDrive\Desktop\FYP\ReactJS app\frontend\public\CNN.jpg');
+  background-image: url('https://blog.sigplan.org/wp-content/uploads/2021/11/shutterstock_144479800-1-scaled.jpg');
   background-size: 200%;
   background-position: center;
 }
