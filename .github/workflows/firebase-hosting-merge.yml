@@ -17,3 +17,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COVID_19_IMAGING_SYSTEM }}'
           channelId: live
           projectId: covid-19-imaging-system
+      
