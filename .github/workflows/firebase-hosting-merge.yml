@@ -17,12 +17,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COVID_19_IMAGING_SYSTEM }}'
           channelId: live
           projectId: covid-19-imaging-system
-      - name: Clear Cache
-        run: |
-          echo "Clearing cache..."
-          rm -rf ${{ runner.workspace }}/node_modules
-          rm -rf ${{ runner.workspace }}/build
-        # Add more cache-clearing commands if needed
-
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      
