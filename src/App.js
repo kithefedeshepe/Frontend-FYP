@@ -18,15 +18,15 @@ import PatientMainPage from "./PatientMainPage/PatientMainPage";
 function App() {
   return (
     <Router>
-			<Routes>
-				<Route path="/" element={<HomePage />} />
-				<Route path="/DoctorMainPage" element={<DoctorMainPage />} />
-				<Route path="/DoctorUploadPage" element={<DoctorUploadPage />} />
-				<Route path="/DoctorViewResult" element={<DoctorViewResult />} />
-				<Route path="/PatientMainPage" element={<PatientMainPage />} />
-				<Route path="/PatientViewReport" element={<PatientViewReport />} />
-			</Routes>
-		</Router>
+		<Routes>
+			<Route path="/" element={<HomePage />} />
+			<Route path="/DoctorMainPage" element={<DoctorMainPage />} />
+			<Route path="/DoctorUploadPage" element={<DoctorUploadPage />} />
+			<Route path="/DoctorViewResult" element={<DoctorViewResult />} />
+			<Route path="/PatientMainPage" element={<PatientMainPage />} />
+			<Route path="/PatientViewReport" element={<PatientViewReport />} />
+		</Routes>
+	</Router>
   );
 }
 
