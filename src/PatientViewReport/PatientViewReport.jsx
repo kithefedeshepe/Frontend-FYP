@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import './PatientViewReport.css'; // Import your CSS file
 
@@ -24,8 +25,8 @@ function PatientViewReport() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <b href="/PatientMainPage">Home</b>
-            <b href="/PatientViewReport">View Report</b>
+            <Link to="/PatientMainPage">Home</Link>
+            <Link to="/PatientViewReport">View Report</Link>
           </div>
         </div>
         <div className="header">COVID-19 Imaging System</div>
@@ -35,8 +36,8 @@ function PatientViewReport() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <b href="#">Profile</b>
-            <b href="/">Logout</b>
+            <Link to="#">Profile</Link>
+            <Link to="/">Logout</Link>
           </div>
         </div>
       </div>

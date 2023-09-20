@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import './DoctorViewResult.css'; // Import your CSS file
 
@@ -24,9 +25,9 @@ function DoctorViewResult() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="/DoctorMainPage">Home</a>
-            <a href="/DoctorUploadPage">Upload</a>
-            <a href="/DoctorViewResult">View Result</a>
+            <Link to="/DoctorMainPage">Home</Link>
+            <Link to="/DoctorUploadPage">Upload</Link>
+            <Link to="/DoctorViewResult">View Result</Link>
           </div>
         </div>
         <div className="header">COVID-19 Imaging System</div>
@@ -36,8 +37,8 @@ function DoctorViewResult() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="#">Profile</a>
-            <a href="/">Logout</a>
+            <Link to="#">Profile</Link>
+            <Link to="/">Logout</Link>
           </div>
         </div>
       </div>

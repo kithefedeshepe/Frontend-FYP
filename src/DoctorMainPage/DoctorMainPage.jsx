@@ -35,8 +35,8 @@ function DoctorMainPage() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="#">Profile</a>
-            <a href="/">Logout</a>
+            <Link to="#">Profile</Link>
+            <Link to="/">Logout</Link>
           </div>
         </div>
       </div>
