@@ -42,9 +42,43 @@ function DoctorViewResult() {
           </div>
         </div>
       </div>
-      {/* ADD ON HERE */}
 
+      <div class="content-box">
+        <b>COVID 19 X-Ray analysis report</b>
+      </div>
+      <div class="row">
+        <div class="id-margin">Patient ID :</div> <input class="input-margin"type="text" id="patientID" name="patientID" value="000001" />
+      </div>
+      <div class="row">
+        <div class="name-margin">
+          First Name : <input class="input-margin"type="text" id="patientFirstName" name="patientFirstName" value="Jack" />
+        </div>
+        <div class="name-margin">
+          Last Name :<input class="input-margin"type="text" id="patientLastName" name="patientLastName" value="Daniels" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="name-margin">
+          Gender : <input class="gender-margin"type="text" id="patientGender" name="patientGender" value="M" />
+        </div>
+        <div class="name-margin">
+          Age :<input class="age-margin"type="text" id="patientAge" name="patientAge" value="25" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="name-margin">
+          <b>COVID Diagnosis</b> :
+          <input class="negative-checkbox"type="checkbox" id="covidNegative" name="covidNegative" value="Negative" disabled/>
+          <div class="checkbox-font"><b>Negative</b></div>
+          <input class="positive-checkbox"type="checkbox" id="covidPositive" name="covidPositive" value="Positive" checked disabled/>
+          <div class="checkbox-font"><b>Positive</b></div>
+        </div>
+        
+      </div>
+      
     </div>
+
+
   );
 }
 

@@ -1,100 +1,193 @@
 /* DoctorViewResult.css */
 
 .doctor-view-result {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .navbar-D {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    background-color: #1e5aa5; 
-    color: white; 
-    margin-bottom: 40px;
-    align-items: center;
-  }
-    
-  
-  /* Links inside the navbar */
-  .navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-  }
-  
-  /* The dropdown container */
-  .dropdown {
-    float: left;
-    overflow: hidden;
-  }
-  
-  /* Dropdown button */
-  .dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit; 
-    margin: 0; 
-  }
-  
-  /* Add a red background color to navbar links on hover */
-  .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: rgb(0, 0, 0); 
-  }
-  
-  /* Dropdown content (hidden by default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
-  /* Add a grey background color to dropdown links on hover */
-  .dropdown-content a:hover {
-    background-color: #ddd;
-  }
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-    
-  .header {
-    font-weight: bold;
-    font-size: 25px;
-    padding-left: 10px;
-  }
-  
-  /* Align right-text and dropdown-button to the right */
-  .drName {
-    margin-left: auto;  
-  }
-    
-  
-  /* Style for the main content area */
-  .content {
-    margin-left: 250px; /* Adjust to match the sidebar width */
-    padding: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  /*ADD ON HERE*/
+.navbar-D {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background-color: #11325c; 
+  color: white; 
+  margin-bottom: 40px;
+  align-items: center;
+}
+  
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; 
+  margin: 0; 
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: rgb(0, 0, 0); 
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+  
+.header {
+  font-weight: bold;
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+/* Align right-text and dropdown-button to the right */
+.drName {
+  margin-left: auto;  
+}
+  
+
+/* Style for the main content area */
+.content {
+  margin-left: 250px; /* Adjust to match the sidebar width */
+  padding: 20px;
+}
+
+.content-box {
+  background-color: #ffffff; 
+  padding: 10px; 
+  flex: 1; 
+  justify-content: center;
+  display: flex;
+  width: 800px;
+  border: 1.5px solid black;
+  border-width: 1.5px 1.5px 0px 1.5px;
+  margin: 0px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.row {
+  background-color: #ffffff; 
+  padding: 10px; 
+  flex: 1; 
+  display: flex;
+  width: 800px;
+  border: 1.5px solid black;
+  border-width: 0px 1.5px 1.5px 1.5px;
+  margin: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-margin{
+  margin-left: 10px;
+  margin-top: 2px;
+  text-align: center;
+  width: 100px;
+  
+}
+
+.id-margin{
+  margin-left: 10px;
+  white-space: pre;
+  padding-right: 12px;
+}
+
+.name-margin{
+  margin-left: 10px;
+  white-space: pre;
+  width: 50%;
+  display: inline-block;
+}
+
+.gender-margin{
+  margin-left: 34px;
+  margin-top: 2px;
+  text-align: center;
+  width: 100px;
+}
+
+.age-margin{
+  margin-left: 56px;
+  margin-top: 2px;
+  text-align: center;
+  width: 100px;
+}
+
+.checkbox-margin{
+  margin-left: 20px;
+  margin-top: 0px;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+}
+
+.negative-checkbox{
+  margin-left: 56px;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+
+.positive-checkbox{
+  margin-left: 25px;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+
+.checkbox-font{
+  font-size: 10px;
+  display: inline;
+}
+
+/*ADD ON HERE*/
