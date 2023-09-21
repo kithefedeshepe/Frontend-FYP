@@ -38,7 +38,6 @@ function DoctorUploadPage() {
           <div class="dropdown-content">
             <Link to="/DoctorMainPage">Home</Link>
             <Link to="/DoctorUploadPage">Upload</Link>
-            <Link to="/DoctorViewResult">View Result</Link>
           </div>
         </div>
         <div className="header">COVID-19 Imaging System</div>
@@ -48,7 +47,7 @@ function DoctorUploadPage() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <Link to="#">Profile</Link>
+            {/* <Link to="#">Profile</Link> */}
             <Link to="/">Logout</Link>
           </div>
         </div>
@@ -93,9 +92,9 @@ function DoctorUploadPage() {
             <input type="hidden" name="selectedImage" value={selectedImage || ''} />
 
             <div className="button-container">
-                <button type="submit" className="analyze-button">
+              <Link to="/DoctorViewResult" className="analyze-button">
                 Analyze Image
-                </button>
+              </Link>
             </div>
           </form>
         </div>

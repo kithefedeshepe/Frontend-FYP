@@ -35,7 +35,7 @@ function PatientMainPage() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <Link to="#">Profile</Link>
+            {/* <Link to="#">Profile</Link> */}
             <Link to="/">Logout</Link>
           </div>
         </div>

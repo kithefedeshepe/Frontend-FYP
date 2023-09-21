@@ -131,12 +131,17 @@
   .analyze-button {
     background-color: #1e5aa5;
     color: white;
-    width: 150px; 
-    height: 40px; 
-    font-weight: bold; 
-    font-size: 16px; 
+    width: 150px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 16px;
     border-radius: 10px;
-    margin-top: 190px; 
+    margin-top: 190px;
+    text-align: center;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    text-decoration: none;
   }
   
   /* Styles for form elements inside the right-box */

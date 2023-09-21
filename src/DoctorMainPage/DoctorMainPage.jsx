@@ -25,7 +25,6 @@ function DoctorMainPage() {
         <div className="dropdown-content">
           <Link to="/DoctorMainPage">Home</Link>
           <Link to="/DoctorUploadPage">Upload</Link>
-          <Link to="/DoctorViewResult">View Result</Link>
         </div>
       </div>
         <div className="header">COVID-19 Imaging System</div>
@@ -35,7 +34,7 @@ function DoctorMainPage() {
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <Link to="#">Profile</Link>
+            {/* <Link to="#">Profile</Link> */}
             <Link to="/">Logout</Link>
           </div>
         </div>
