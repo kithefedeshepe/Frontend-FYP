@@ -93,3 +93,137 @@
   }
 
   /*ADD ON HERE*/
+/* Style for the main content area */
+.content {
+  margin-left: 250px; /* Adjust to match the sidebar width */
+  padding: 20px;
+}
+
+.content-box {
+  background-color: #ffffff; 
+  padding: 10px; 
+  flex: 1; 
+  justify-content: center;
+  display: flex;
+  width: 800px;
+  border: 1.5px solid black;
+  border-width: 1.5px 1.5px 0px 1.5px;
+  margin: 0px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.row {
+  background-color: #ffffff; 
+  padding: 10px; 
+  flex: 1; 
+  display: flex;
+  width: 800px;
+  border: 1.5px solid black;
+  border-width: 0px 1.5px 1.5px 1.5px;
+  margin: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-margin{
+  margin-left: 10px;
+  margin-top: 2px;
+  text-align: center;
+  width: 100px;
+  
+}
+
+.id-margin{
+  margin-left: 10px;
+  white-space: pre;
+  padding-right: 12px;
+}
+
+.name-margin{
+  margin-left: 10px;
+  white-space: pre;
+  width: 50%;
+  display: inline-block;
+}
+
+.gender-margin{
+  margin-left: 34px;
+  margin-top: 2px;
+  text-align: center;
+  width: 100px;
+}
+
+.age-margin{
+  margin-left: 56px;
+  margin-top: 2px;
+  text-align: center;
+  width: 100px;
+}
+
+.checkbox-margin{
+  margin-left: 20px;
+  margin-top: 0px;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+}
+
+.negative-checkbox{
+  margin-left: 56px;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+
+.positive-checkbox{
+  margin-left: 25px;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+
+.checkbox-font{
+  font-size: 10px;
+  display: inline;
+}
+
+
+  /* Style for the print button and submit button */
+.print-button2,
+.submit-button2 {
+  
+  background-color: #629c44;
+  color: white;
+  width: 150px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.button-container3 {
+  float: right;
+  margin-left: 1300px;
+  margin-top: 20px;
+}
+
+/* Style for the comment label */
+.comment-label {
+  display: block;
+  text-align: center; /* Center-align the label */
+  margin-bottom: 10px; /* Add some space below the label */
+}
+
+/* Style for the comment box */
+.comment-box {
+  display: block;
+  margin: 0 auto; /* Center-align the comment box */
+  width: 800px; /* Adjust the width as needed */
+  height: 200px;
+}

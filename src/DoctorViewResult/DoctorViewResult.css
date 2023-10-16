@@ -191,3 +191,37 @@
 }
 
 /*ADD ON HERE*/
+/* Style for the print button and submit button */
+.print-button,
+.submit-button {
+  
+  background-color: #1e5aa5;
+  color: white;
+  width: 150px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.button-container2 {
+  float: right;
+  margin-left: 1300px;
+  margin-top: 20px;
+}
+
+/* Style for the comment label */
+.comment-label {
+  display: block;
+  text-align: center; /* Center-align the label */
+  margin-bottom: 10px; /* Add some space below the label */
+}
+
+/* Style for the comment box */
+.comment-box {
+  display: block;
+  margin: 0 auto; /* Center-align the comment box */
+  width: 800px; /* Adjust the width as needed */
+  height: 200px;
+}

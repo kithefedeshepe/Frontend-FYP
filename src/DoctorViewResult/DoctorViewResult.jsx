@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import './DoctorViewResult.css'; // Import your CSS file
 
+
 function DoctorViewResult() {
 
   const [reports, setReports] = useState([]); // Initialize an empty array for reports
@@ -17,6 +18,13 @@ function DoctorViewResult() {
           console.error('There was an error!', error);
         });
     }, []);*/
+    // Add state variable to store the comment
+    const [comment, setComment] = useState('');
+
+    // Function to handle the comment input change
+    const handleCommentSubmit = (event) => {
+      setComment(event.target.value);
+  };
   return (
     <div className="doctor-view-result">
       <div className="navbar-D">
@@ -72,9 +80,19 @@ function DoctorViewResult() {
           <input class="positive-checkbox"type="checkbox" id="covidPositive" name="covidPositive" value="Positive" checked disabled/>
           <div class="checkbox-font"><b>Positive</b></div>
         </div>
-        
       </div>
       
+      <div className="button-container2">
+        <button className="print-button">Print</button>
+      </div>
+
+      {/* comment segment */}
+      <label className="comment-label">Comments:</label>
+      <textarea className="comment-box"></textarea>
+      <div className="button-container2">
+        <button className="submit-button" onClick={handleCommentSubmit} >Submit</button>
+      </div>
+
     </div>
 
 
