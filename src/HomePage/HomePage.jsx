@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; 
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   //for DEMO only
@@ -19,7 +20,10 @@ function HomePage() {
       alert('Invalid username or password');
     }
   };
+
   return (
+  <html>
+    <body>
     <div className="homepage">
       <main>
         <h2 className="h2">WELCOME</h2>
@@ -27,7 +31,7 @@ function HomePage() {
           <div className="left-box">
             {/* Content for the left box */}
           </div>
-          <form className="login-form" onSubmit={handleLogin}>
+          <form className="login-form">
             <p>COVID-19 Imaging Recognition System</p>
             <input
               type="text"
@@ -43,13 +47,28 @@ function HomePage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" className="login-button">
+            <button type="submit" onClick={handleLogin} className="login-button">
               Login
             </button>
+            <label className="create-account-label">No account? Create one below.</label>
+
+            <div className="create-button-container">
+              <Link className="view_result_link"
+                to={"/CreateAccountPage"}>
+                  <button id="create-button" className="create-account-button">Create account</button>
+              </Link>
+            </div>
+
+
           </form>
         </section>
       </main>
     </div>
+
+
+  </body>
+</html>
+
   );
 }
 

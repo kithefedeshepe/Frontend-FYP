@@ -25,87 +25,208 @@ function PatientViewReport() {
     const handleCommentSubmit = (event) => {
       setComment(event.target.value);
     };
+
+    let timeout;
+  
+    const handleMouseEnter = () =>
+    {
+  
+      clearTimeout(timeout);
+      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+      dropdownContent.style.display = "block";
+      dropdownContent.classList.remove('hidden');
+  
+    };
+  
+    const handleMouseLeave = () =>
+    {
+  
+      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+      timeout = setTimeout(() => {
+        dropdownContent.classList.add('hidden');
+        setTimeout(() => {
+          dropdownContent.style.display = "none";
+        }, 300); // 1000 milliseconds = 1 second
+      },200); // Adjust the delay time (1 second = 1000 milliseconds)
+   
+    };
+  
+    const contentHandleMouseEnter = () =>
+    {
+  
+      clearTimeout(timeout);
+  
+    };
+  
+    const contentHandleMouseLeave = () =>
+    {
+  
+      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+      const timeout = setTimeout(() => {
+      dropdownContent.classList.add('hidden');
+      }, 200); // Adjust the delay time (1 second = 1000 milliseconds)
+      setTimeout(() => {
+        dropdownContent.style.display = "none";
+      }, 500); // 1000 milliseconds = 1 second
+      
+    };
+  
+    const optionButtonHandleMouseEnter = () =>
+    {
+  
+      clearTimeout(timeout);
+      const dropdownContent = document.querySelector(".dropdown-content-option_P");
+      dropdownContent.style.display = "block";
+      dropdownContent.classList.remove('hidden');
+  
+    };
+  
+    const optionButtonHandleMouseLeave = () =>
+    {
+  
+      const dropdownContent = document.querySelector(".dropdown-content-option_P");
+      timeout = setTimeout(() => {
+        dropdownContent.classList.add('hidden');
+        setTimeout(() => {
+          dropdownContent.style.display = "none";
+        }, 300); // 1000 milliseconds = 1 second
+      },200); // Adjust the delay time (1 second = 1000 milliseconds)
+  
+    };
+  
+    const optionHandleMouseEnter = () =>
+    {
+  
+      clearTimeout(timeout);
+  
+    };
+  
+    const optionHandleMouseLeave = () =>
+    {
+  
+      const dropdownContent = document.querySelector(".dropdown-content-option_P");
+      const timeout = setTimeout(() => {
+      dropdownContent.classList.add('hidden');
+      }, 200); // Adjust the delay time (1 second = 1000 milliseconds)
+      setTimeout(() => {
+        dropdownContent.style.display = "none";
+      }, 500); // 1000 milliseconds = 1 second
+      
+    };
+
+    const printDiv = () =>
+    {
+      var printContents = document.getElementById('print-content').innerHTML;
+      var w=window.open();
+      w.document.write(printContents);
+      w.print();
+      w.close();
+    };
   return (
+  <html>
+    <body className='body'>
     <div className="patient-view-report">
       <div className="navbar-P">
+
       <div class="dropdown">
-          <button class="dropbtn">Menu
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <Link to="/PatientMainPage">Home</Link>
-            <Link to="/PatientViewReport">View Report</Link>
-          </div>
+        <button 
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        class="menu_button_P">
+        </button>
+        <div
+        onMouseEnter={contentHandleMouseEnter}
+        onMouseLeave={contentHandleMouseLeave} 
+        class="dropdown-content-menu_P">
+          <Link to="/PatientMainPage">Home</Link>
         </div>
-        <div className="header">COVID-19 Imaging System</div>
-        <div className="patientName">Jane Doe</div>
-        <div class="dropdown">
-          <button class="dropbtn">Options
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            {/* <Link to="#">Profile</Link> */}
-            <Link to="/">Logout</Link>
-          </div>
-        </div>
-      </div>
-      {/* ADD ON HERE */}
-      <div class="content-box">
-        <b>COVID 19 X-Ray analysis report</b>
-      </div>
-      <div class="row">
-        <div class="id-margin">Patient ID :</div> <input class="input-margin"type="text" id="patientID" name="patientID" />
-      </div>
-      <div class="row">
-        <div class="name-margin">
-          First Name : <input class="input-margin"type="text" id="patientFirstName" name="patientFirstName"  />
-        </div>
-        <div class="name-margin">
-          Last Name :<input class="input-margin"type="text" id="patientLastName" name="patientLastName"  />
-        </div>
-      </div>
-      <div class="row">
-        <div class="name-margin">
-          Gender : <input class="gender-margin"type="text" id="patientGender" name="patientGender" />
-        </div>
-        <div class="name-margin">
-          Age :<input class="age-margin"type="text" id="patientAge" name="patientAge"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="id-margin">Doctor ID :</div> <input class="input-margin"type="text" id="doctorID" name="doctorID" />
-      </div>
-      <div class="row">
-        <div class="name-margin">
-          First Name : <input class="input-margin"type="text" id="DfirstName" name="DfirstName" />
-        </div>
-        <div class="name-margin">
-          Last Name :<input class="input-margin"type="text" id="DlastName" name="DlastName"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="name-margin">
-          <b>COVID Diagnosis</b> :
-          <input class="negative-checkbox"type="checkbox" id="covidNegative" name="covidNegative" value="Negative" disabled/>
-          <div class="checkbox-font"><b>Negative</b></div>
-          <input class="positive-checkbox"type="checkbox" id="covidPositive" name="covidPositive" value="Positive" checked disabled/>
-          <div class="checkbox-font"><b>Positive</b></div>
-        </div>
-      </div>
-      
-      <div className="button-container2">
-        <button className="print-button2">Print</button>
       </div>
 
-      {/* comment segment */}
-      <label className="comment-label">Comments:</label>
-      <textarea className="comment-box"></textarea>
-      <div className="button-container3">
-        <button className="submit-button2" onClick={handleCommentSubmit} >Submit</button>
-      </div>
+      <div className="header">COVID-19 Imaging System</div>
+      <div className="drName">Jane Doe</div>
 
-      
+      <div class="dropdown">
+        <button
+        onMouseEnter={optionButtonHandleMouseEnter}
+        onMouseLeave={optionButtonHandleMouseLeave}
+        class="options_button_P">
+        </button>
+        <div
+        onMouseEnter={optionHandleMouseEnter}
+        onMouseLeave={optionHandleMouseLeave}
+        class="dropdown-content-option_P">
+          {/* <Link to="#">Profile</Link> */}
+          <Link to="/">Logout</Link>
+        </div>
+      </div>
     </div>
+
+      {/* ADD ON HERE */}
+      <div id="print-content">
+        <div class="patient_view-report-content-box">
+              <b>COVID 19 X-Ray analysis report</b>
+            </div>
+
+            <div class="patient_view-report-id-row">
+              <div class="id-margin">Patient ID :</div>
+              <input class="id-input-space"type="text" id="patientID" name="patientD" value="000001" />
+              <div className='for-alignment'></div>
+              <div className='for-alignment'></div>
+              <div className='for-alignment'></div>
+            </div>
+
+            <div class="patient_view-report-name-row">
+              <div class="id-margin">First Name :</div>
+              <input class="id-input-space"type="text" id="patientFirstName" name="patientFirstName" value="Jack" />
+              <div class="id-margin">Last Name :</div>
+              <input class="id-input-space"type="text" id="patientLastName" name="patientLastName" value="Daniels" />
+            </div>
+
+            <div class="patient_view-report-name-row">
+              <div class="id-margin">Gender :</div>
+              <input class="id-input-space"type="text" id="patientGender" name="patientGender" value="M" />
+              <div class="id-margin">Age :</div>
+              <input class="id-input-space"type="text" id="patientAge" name="patientAge" value="69" />
+            </div>
+
+            <div class="patient_view-report-id-row">
+              <div class="id-margin">Doctor ID :</div>
+              <input class="id-input-space"type="text" id="doctorID" name="doctorID" value="000001" />
+              <div className='for-alignment'></div>
+              <div className='for-alignment'></div>
+              <div className='for-alignment'></div>
+            </div>
+
+            <div class="patient_view-report-name-row">
+              <div class="id-margin">First Name :</div>
+              <input class="id-input-space"type="text" id="doctorFirstName" name="doctorFirstName" value="Jack" />
+              <div class="id-margin">Last Name :</div>
+              <input class="id-input-space"type="text" id="doctorLastName" name="doctorLastName" value="Daniels" />
+            </div>
+
+            <div class="patient_view-report-last-row">
+              <div class="id-margin">Diagnosis :</div>
+              <input class="view-report-negative-checkbox"type="checkbox" id="covidNegative" name="covidNegative" value="Negative" disabled/>
+              <div class="view-report-checkbox-font"><b>Negative</b></div>
+              <input class="view-report-positive-checkbox"type="checkbox" id="covidPositive" name="covidPositive" value="Positive" checked disabled/>
+              <div class="view-report-checkbox-font"><b>Positive</b></div>
+            </div>
+            
+            {/* comment segment */}
+            <label className="patient-view-report-comment-label">Doctor's comment: </label>
+            <textarea className="doctor_comment"></textarea>
+          </div>
+
+          <div className="patient-view-report-submit-container">
+            <div className='patient-submit-comment-container'>
+              <button className="patient-view-report-submit-button" onClick={printDiv} >Print and Save</button>
+            </div>
+          </div>
+
+        </div>
+    </body>
+  </html>
+
   );
 }
 

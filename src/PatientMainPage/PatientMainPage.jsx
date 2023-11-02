@@ -16,85 +16,215 @@ function PatientMainPage() {
           console.error('There was an error!', error);
         });
     }, []);*/
-  return (
-    <div className="patient-main-page">
-      <div className="navbar-P">
-      <div class="dropdown">
-          <button class="dropbtn">Menu
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <Link to="/PatientMainPage">Home</Link>
-            <Link to="/PatientViewReport">View Report</Link>
-          </div>
-        </div>
-        <div className="header">COVID-19 Imaging System</div>
-        <div className="patientName">Jane Doe</div>
-        <div class="dropdown">
-          <button class="dropbtn">Options
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            {/* <Link to="#">Profile</Link> */}
-            <Link to="/">Logout</Link>
-          </div>
-        </div>
-      </div>
+  
+    let timeout;
+  
+    const checkReportAvailability = () =>
+    {
+      //get report status from backend
+      // *write code here*
+      /*var status = ...; //get status from back end
+        var available = "view-button-P";
+        var unavailable = "not-available";
+        if (status == true)
+        {
+          document.getElementById("MyElement").className = "view-button-P";
+        }else if (status == false){
+          document.getElementById("MyElement").className = "not-available";
+        }
+      */
 
-      <div className="search-bar">
-        <input type="text" placeholder="Search..." />
-            <div className="filter-dropdown">
-                <select>
-                <option value="option1">Report ID</option>
-                <option value="option2">Doctor name</option>
-                <option value="option3">Date created</option>
-                <option value="option4">status</option>
-                </select>
+    };
+
+    const handleMouseEnter = () =>
+    {
+  
+      clearTimeout(timeout);
+      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+      dropdownContent.style.display = "block";
+      dropdownContent.classList.remove('hidden');
+  
+    };
+  
+    const handleMouseLeave = () =>
+    {
+  
+      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+      timeout = setTimeout(() => {
+        dropdownContent.classList.add('hidden');
+        setTimeout(() => {
+          dropdownContent.style.display = "none";
+        }, 300); // 1000 milliseconds = 1 second
+      },200); // Adjust the delay time (1 second = 1000 milliseconds)
+   
+    };
+  
+    const contentHandleMouseEnter = () =>
+    {
+  
+      clearTimeout(timeout);
+  
+    };
+  
+    const contentHandleMouseLeave = () =>
+    {
+  
+      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+      const timeout = setTimeout(() => {
+      dropdownContent.classList.add('hidden');
+      }, 200); // Adjust the delay time (1 second = 1000 milliseconds)
+      setTimeout(() => {
+        dropdownContent.style.display = "none";
+      }, 500); // 1000 milliseconds = 1 second
+      
+    };
+  
+    const optionButtonHandleMouseEnter = () =>
+    {
+  
+      clearTimeout(timeout);
+      const dropdownContent = document.querySelector(".dropdown-content-option_P");
+      dropdownContent.style.display = "block";
+      dropdownContent.classList.remove('hidden');
+  
+    };
+  
+    const optionButtonHandleMouseLeave = () =>
+    {
+  
+      const dropdownContent = document.querySelector(".dropdown-content-option_P");
+      timeout = setTimeout(() => {
+        dropdownContent.classList.add('hidden');
+        setTimeout(() => {
+          dropdownContent.style.display = "none";
+        }, 300); // 1000 milliseconds = 1 second
+      },200); // Adjust the delay time (1 second = 1000 milliseconds)
+  
+    };
+  
+    const optionHandleMouseEnter = () =>
+    {
+  
+      clearTimeout(timeout);
+  
+    };
+  
+    const optionHandleMouseLeave = () =>
+    {
+  
+      const dropdownContent = document.querySelector(".dropdown-content-option_P");
+      const timeout = setTimeout(() => {
+      dropdownContent.classList.add('hidden');
+      }, 200); // Adjust the delay time (1 second = 1000 milliseconds)
+      setTimeout(() => {
+        dropdownContent.style.display = "none";
+      }, 500); // 1000 milliseconds = 1 second
+      
+    };
+
+
+  return (
+  <html>
+    <body className='body'>
+      <div className="patient-main-page">
+        <div className="navbar-P">
+
+          <div class="dropdown">
+            <button 
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            class="menu_button_P">
+            </button>
+            <div
+            onMouseEnter={contentHandleMouseEnter}
+            onMouseLeave={contentHandleMouseLeave} 
+            class="dropdown-content-menu_P">
+              <Link to="/PatientMainPage">Home</Link>
             </div>
-      </div>
-    
-      <div className="table-container">
-        <table className="data-table">
-          <thead>
-            <tr>
-                <th>Report ID</th>
-                <th>Doctor ID</th>
-                <th>Email</th>
-                <th>Date created</th>
-                <th>Status</th>
-                <th>Due date</th>
-                <th>Visibility</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>RID123</td>
-            <td>Johnny signs</td>
-            <td>johnnysigns@email.com</td>
-            <td>19/9/23</td>
-            <td>Negative</td>
-            <td>23/9/23</td>
-            <td>Visibile</td>
-            <td></td>
-          </tr>
-            {reports.map(report => (
-              <tr key={report.id}>
-                <td>{report.reportId}</td>
-                <td>{report.patientId}</td>
-                <td>{report.patientName}</td>
-                <td>{report.email}</td>
-                <td>{report.dateCreated}</td>
-                <td>{report.status}</td>
-                <td>{report.dateReviewed}</td>
-                <td>{report.visibility}</td>
-                <td>{/* Your additional data fields here */}</td>
+          </div>
+
+          <div className="header">COVID-19 Imaging System</div>
+          <div className="drName">Jane Doe</div>
+
+          <div class="dropdown">
+            <button
+            onMouseEnter={optionButtonHandleMouseEnter}
+            onMouseLeave={optionButtonHandleMouseLeave}
+            class="options_button_P">
+            </button>
+            <div
+            onMouseEnter={optionHandleMouseEnter}
+            onMouseLeave={optionHandleMouseLeave}
+            class="dropdown-content-option_P">
+              {/* <Link to="#">Profile</Link> */}
+              <Link to="/">Logout</Link>
+            </div>
+          </div>
+        </div>
+      
+        <div className="table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                  <th>Report ID</th>
+                  <th>Doctor ID</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                  
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+            <tr>
+              <td>RID123</td>
+              <td>Johnny signs</td>
+              <td>johnnysigns@email.com</td>
+              <td>Negative</td>
+              <td>
+                <div className='action_cell'>
+                  <div className='action-button-container'>
+                    <Link id="action_link" className="view_result_link"
+                      to={"/PatientViewReport"}>
+                        <button id="view-button-P" title="View report" className="view-button-P"></button>
+                    </Link>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>RID123</td>
+              <td>Johnny signs</td>
+              <td>johnnysigns@email.com</td>
+              <td>Pending</td>
+              <td>
+                <div className='action_cell'>
+                  <div className='action-button-container'>
+                        <button disabled id="view-button-P" title="Not available" className="not-available"></button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+              {reports.map(report => (
+                <tr key={report.id}>
+                  <td>{report.reportId}</td>
+                  <td>{report.patientId}</td>
+                  <td>{report.patientName}</td>
+                  <td>{report.email}</td>
+                  <td>{report.dateCreated}</td>
+                  <td>{report.status}</td>
+                  <td>{report.dateReviewed}</td>
+                  <td>{report.visibility}</td>
+                  <td>{/* Your additional data fields here */}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </body>            
+</html>
   );
 }
 

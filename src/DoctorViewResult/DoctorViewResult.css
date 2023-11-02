@@ -9,11 +9,12 @@
 .navbar-D {
   display: flex;
   justify-content: space-between;
-  padding: 8px;
+  padding: 20px;
   background-color: #11325c; 
   color: white; 
   margin-bottom: 40px;
   align-items: center;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
   
 
@@ -97,131 +98,230 @@
   padding: 20px;
 }
 
-.content-box {
+.view-report-content-box {
   background-color: #ffffff; 
   padding: 10px; 
   flex: 1; 
   justify-content: center;
   display: flex;
-  width: 800px;
+  width: 700px;
   border: 1.5px solid black;
-  border-width: 1.5px 1.5px 0px 1.5px;
+  border-width: 0px 0px 0px 0px;
   margin: 0px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-
+  border-radius: 8px 8px 0px 0px;
+  box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.2);
 }
 
-.row {
+.view-report-id-row{
+  background-color: #ffffff; 
+  padding: 10px; 
+  display: flex;
+  width: 700px;
+  border: 1.5px solid black;
+  border-width: 0px 0px 1.5px 0px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0px 0px 0px 0px;
+  box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.2);
+  font-weight: bold;
+}
+
+.view-report-name-row {
+  background-color: #ffffff; 
+  padding: 10px; 
+  display: flex;
+  width: 700px;
+  border: 1.5px solid black;
+  border-width: 0px 0px 1.5px 0px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0px 0px 0px 0px;
+  box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.2);
+  font-weight: bold;
+}
+
+.view-report-row {
   background-color: #ffffff; 
   padding: 10px; 
   flex: 1; 
   display: flex;
-  width: 800px;
+  width: 700px;
   border: 1.5px solid black;
-  border-width: 0px 1.5px 1.5px 1.5px;
+  border-width: 0px 0px 1.5px 0px;
   margin: 0px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 0px 0px 0px 0px;
+  box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.2);
+  font-weight: bold;
+}
+
+.view-report-last-row {
+  background-color: #ffffff; 
+  padding: 10px; 
+  flex: 1; 
+  display: flex;
+  width: 700px;
+  border: 1.5px solid black;
+  border-width: 0px 0px 0px 0px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0px 0px 8px 8px;
+  box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.2);
+}
+
+.id-input-space{
+  border: 0px;
+  flex: 2;
+  width: 0;
+  text-align: center;
 }
 
 .input-margin{
-  margin-left: 10px;
-  margin-top: 2px;
-  text-align: center;
-  width: 100px;
-  
+  flex: 1;
+  text-align: right;
+  border: 0px;
+  width: 0;
+}
+
+.for-alignment{
+  flex: 1;
 }
 
 .id-margin{
-  margin-left: 10px;
-  white-space: pre;
-  padding-right: 12px;
+  margin: 0px;
+  flex-basis: 15%;
+  width: 0;
+  text-align: right;
+  font-weight: bold;
 }
 
-.name-margin{
-  margin-left: 10px;
-  white-space: pre;
-  width: 50%;
+.view-report-negative-checkbox{
+  margin-left: 56px;
+  text-align: center;
+  width: 20px;
+  height: 20px;
   display: inline-block;
 }
 
-.gender-margin{
-  margin-left: 34px;
-  margin-top: 2px;
-  text-align: center;
-  width: 100px;
-}
-
-.age-margin{
-  margin-left: 56px;
-  margin-top: 2px;
-  text-align: center;
-  width: 100px;
-}
-
-.checkbox-margin{
-  margin-left: 20px;
-  margin-top: 0px;
-  text-align: center;
-  width: 15px;
-  height: 15px;
-}
-
-.negative-checkbox{
-  margin-left: 56px;
-  text-align: center;
-  width: 15px;
-  height: 15px;
-  display: inline-block;
-}
-
-.positive-checkbox{
+.view-report-positive-checkbox{
   margin-left: 25px;
   text-align: center;
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   display: inline-block;
+  filter: invert(100%) hue-rotate(18deg) brightness(5);
 }
 
-.checkbox-font{
-  font-size: 10px;
+.view-report-checkbox-font{
+  font-size: 13px;
   display: inline;
 }
 
 /*ADD ON HERE*/
 /* Style for the print button and submit button */
-.print-button,
-.submit-button {
-  
-  background-color: #1e5aa5;
-  color: white;
-  width: 150px;
-  height: 40px;
-  font-weight: bold;
-  font-size: 16px;
-  border-radius: 10px;
-  text-align: center;
+.view-report-submit-button {
+  background-color: #11325c;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    text-decoration: none;
+    transition: transform 0.2s;
+    margin-bottom: 50px;
+    border-width: 0px 0px 0px 0px;
 }
 
-.button-container2 {
-  float: right;
-  margin-left: 1300px;
-  margin-top: 20px;
+.view-report-submit-button:hover {
+  /*  Making button bigger on hover  */
+    transform: scale(1.2);
+  }
+
+.view-report-submit-container {
+ width: 718px;
+ margin-left: auto;
+ margin-right: auto;
+ margin-top: 40px;
+ text-align: right;
 }
 
 /* Style for the comment label */
-.comment-label {
-  display: block;
-  text-align: center; /* Center-align the label */
+.view-report-comment-label {
   margin-bottom: 10px; /* Add some space below the label */
+  text-align: center;
+  color: white;
+  font-size: 18px;
 }
 
 /* Style for the comment box */
-.comment-box {
+.view-report-comment-box {
   display: block;
   margin: 0 auto; /* Center-align the comment box */
-  width: 800px; /* Adjust the width as needed */
+  width: 718px; /* Adjust the width as needed */
   height: 200px;
+  border: 0px;
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.2);
+}
+
+.images-box{
+  display: flex;
+  margin: 0 auto 10px; /* Center-align the comment box */
+  width: 710px; /* Adjust the width as needed */
+  height: 410px;
+  border: 0px;
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.2);
+  background-color: white;
+  position: relative; /* For positioning the image inside the container */
+  overflow: hidden; /* Hide overflowing parts of the image */
+}
+
+.original-image{
+  
+  width: 100%; /* Make the image take up 100% of the container's width */
+  height: 100%; /* Make the image take up 100% of the container's height */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.anomaly-image{
+  display: inline-block;
+  width: 100%; /* Make the image take up 100% of the container's width */
+  height: 100%; /* Make the image take up 100% of the container's height */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.image-box-label {
+  margin-bottom: 10px; /* Add some space below the label */
+  text-align: left;
+  color: white;
+  font-size: 20px;
+  background: rgba(255, 0, 0, 0);
+  float: right;
+  font-weight: 15;
+}
+
+.image-box-label-2 {
+  margin-bottom: 10px; /* Add some space below the label */
+  text-align: left;
+  color: white;
+  font-size: 20px;
+  background: rgba(255, 0, 0, 0);
+  float: left;
+  font-weight: 15;
+}
+
+
+.label-container{
+  width: 480px;
+  margin: 0 auto 10px;
 }

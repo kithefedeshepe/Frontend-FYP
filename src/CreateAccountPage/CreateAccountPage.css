@@ -1,0 +1,53 @@
+.create-account-box {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0);; 
+    padding: 20px; 
+    flex: 0.8; 
+    border: 0px solid #ccc;
+    align-items: center;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    border-radius: 8px 8px 8px 8px;
+    height: 700px;
+    width: auto;
+  }
+
+.role-box{
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.role-check{
+    margin-right: 20px;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.spec-row{
+    padding-bottom: 20px;
+    display: none;
+}
+
+.create-button-container2{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+  }
+
+  .warning{
+    color: red;
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .create-info-title{
+    color: #11325c;
+    text-decoration: underline;
+  }

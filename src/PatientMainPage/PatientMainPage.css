@@ -1,162 +1,336 @@
 /* PatientMainPage.css */
 
 .patient-main-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .navbar-P {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    background-color: #629c44; 
-    color: white; 
-    margin-bottom: 40px;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  /* Links inside the navbar */
+.navbar-P {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #629c44; 
+  color: white; 
+  margin-bottom: 40px;
+  align-items: center;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the navbar */
 .navbar b {
-  float: left;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  text-decoration: none;
+float: left;
+font-size: 16px;
+color: white;
+text-align: center;
+text-decoration: none;
+}
+
+.menu_button_P {
+background-image: url("/public/menu_icon.png");
+background-size: cover;
+background-color: #629c44; 
+height: 35px;
+width: 35px;
+border:  none;
+box-shadow: none;
+display: flex;
+transition: transform 0.2s;
+}
+
+.menu_button_P:hover {
+/*  Making button bigger on hover  */
+  transform: scale(1.2);
+}
+
+.options_button_P {
+background-image: url("/public/patient_icon.png");
+background-size: cover;
+background-color: #629c44; 
+height: 35px;
+width: 35px;
+border:  none;
+box-shadow: none;
+display: flex;
+transition: transform 0.2s;
+}
+
+.options_button_P:hover {
+/*  Making button bigger on hover  */
+  transform: scale(1.2);
 }
 
 /* The dropdown container */
 .dropdown {
-  float: left;
-  overflow: hidden;
+float: left;
+overflow: hidden;
 }
 
 /* Dropdown button */
 .dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; 
-  margin: 0; 
+font-size: 16px;
+border: none;
+outline: none;
+color: white;
+padding: 14px 16px;
+background-color: inherit;
+font-family: inherit; 
+margin: 0; 
 }
+
+@keyframes fadeOut {
+0% {
+  opacity: 1;
+  max-height: 200px;
+}
+100% {
+  opacity: 0;
+  max-height: 0;
+}
+}
+
 
 /* Add a red background color to navbar links on hover */
 .navbar b:hover, .dropdown:hover .dropbtn {
-  background-color: rgb(0, 0, 0); 
+background-color: rgb(0, 0, 0); 
 }
 
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  font-weight: normal;
+.dropdown-content-menu_P {
+display: none;
+position:absolute;
+background-color: white;
+min-width: 150px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+left: 15px;
+top: 75px;
+opacity: 1;
+transition: opacity 0.3s ease;
+}
+
+
+.dropdown-content-menu_P.hidden {
+animation: fadeOut 0.3s ease forwards;
 }
 
 /* Links inside the dropdown */
-.dropdown-content b {
+.dropdown-content-menu_P a {
+float: none;
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+text-align: left;
+text-align: center;
+transition: transform 0.2s;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content-menu_P a:hover {
+background-color: #629c44;
+color: white;
+transform: scale(1.2);
+}
+
+.dropdown-content-option_P {
+  display: none;
+  position:absolute;
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 15px;
+  top: 75px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.dropdown-content-option_P.hidden {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.dropdown-content-option_P a {
   float: none;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  text-align: left;
-  font-weight: normal;
+  text-align: center;
+  transition: transform 0.2s;
 }
 
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content b:hover {
-  background-color: #ddd;
+.dropdown-content-option_P a:hover {
+  background-color: #629c44;
+  color: white;
+  transform: scale(1.2);
 }
+
+
+/* Add a grey background color to dropdown links on hover */
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-  display: block;
+display: block;
 }
-  
-  
-  .header-text {
-    font-weight: bold;
-    font-size: 25px;
-    padding-left: 10px;
-  }
-  
-  /* Align right-text and dropdown-button to the right */
-  .patientName {
-    margin-left: auto; 
-  }
-  
-  
-  /* Style the search bar */
-  .search-bar {
-    padding: 0 30px; 
-    flex-grow: 1; 
-    display: flex;
-    align-items: center;
-    width: 20%;
-    margin-bottom: 20px;
-  }
-  
-  .search-bar input[type="text"] {
-    flex-grow: 1; 
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
 
-  }
-  
-  
-  /* Style the combo box */
-  .filter-dropdown select {
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 100px; 
-    margin-left: 10px;
-  }
-  
-  .filter-dropdown select:focus {
-    outline: none; 
-  }
+
+.header-text {
+  font-weight: bold;
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+/* Align right-text and dropdown-button to the right */
+.patientName {
+  margin-left: auto; 
+}
+
+
+/* Style the search bar */
+.search-bar {
+  padding: 0 30px; 
+  flex-grow: 1; 
+  display: flex;
+  align-items: center;
+  width: 20%;
+  margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+  flex-grow: 1; 
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+
+}
+
+
+/* Style the combo box */
+.filter-dropdown select {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100px; 
+  margin-left: 10px;
+}
+
+.filter-dropdown select:focus {
+  outline: none; 
+}
 /*TABLE */
 .table-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    padding: 0 30px; 
-  }
+  
+  display: flex;
+  justify-content: center;
 
+}
 
 .data-table {
-    margin: 0 auto; 
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ddd;
-  }
-  
+  margin: 0 auto; 
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #d6d6d6; 
+  border-color: #D6D6D6;
+}
 
-  .data-table th {
-    background-color: #9c9c9c; 
-    color: white; 
-    border: 1px solid #ddd; 
-    padding: 8px; 
-    text-align: left; 
-  }
-  
-  
-  .data-table td {
-    border: 1px solid #ddd; 
-    padding: 8px; 
-    text-align: left; 
-  }
-  
+.data-table th {
+  background-color: #d6d6d6; 
+  color: #11325c;
+  padding: 8px; 
+  text-align: left; 
+  border-color: #bdbbbb;
+}
 
-  .data-table tr:hover {
-    background-color: #f5f5f5; 
-  }
+
+.data-table td {
+  text-align: left; 
+  border-color: #bdbbbb;
+  box-shadow: 0px 16px 0px 0px rgba(0,0,0,0.2);
+}
+
+.data-table tr {
+  border: 1px;
+  border-color: #bdbbbb;
+  background-color: white;
+}
+
+.action_cell{
+display: flex;
+}
+
+.patient-input-info{
+background: #FFFFFF;
+color: #444444;
+border-color: #AAAAAA;
+border-width: 1px;
+border-style: solid;
+border-radius: 3px 3px 3px 3px;
+font-family: "Source Sans 3";
+font-weight: 500;
+font-size: 15px;
+flex: 1;
+min-width: 0;
+}
+
+
+.action-button-container{
+flex:1;
+align-items: center;
+}
+
+.view-button-P {
+background-image: url("/public/view_report_icon.png");
+background-size: cover;
+height: 35px;
+width: 35px;
+border:  none;
+box-shadow: none;
+display: flex;
+background-color: white; 
+transition: transform 0.2s;
+margin: auto;
+}
+
+.not-available{
+background-image: url("/public/not_available_icon.png");
+background-size: cover;
+height: 35px;
+width: 35px;
+border:  none;
+box-shadow: none;
+display: flex;
+background-color: white; 
+margin: auto;
+}
+
+.view-button-P:hover {
+/*  Making button bigger on hover  */
+  transform: scale(1.2);
+}
+
+.view_result_link{
+text-decoration: none;
+}
+
+.download-button-P {
+background-image: url("/public/download_icon.png");
+background-size: cover;
+height: 25px;
+width: 25px;
+border:  none;
+box-shadow: none;
+display: flex;
+background-color: white; 
+transition: transform 0.2s;
+margin: auto;
+margin-top: 5px;
+}
+
+.download-button-P:hover {
+/*  Making button bigger on hover  */
+  transform: scale(1.2);
+}
+
+.view_result_link{
+text-decoration: none;
+}

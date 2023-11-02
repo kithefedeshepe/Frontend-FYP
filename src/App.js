@@ -14,6 +14,8 @@ import PatientViewReport from "./PatientViewReport/PatientViewReport";
 //PatientMainPage
 import PatientMainPage from "./PatientMainPage/PatientMainPage";
 
+import CreateAccountPage from "./CreateAccountPage/CreateAccountPage";
+
 function App() {
   return (
     <Router>
@@ -24,6 +26,7 @@ function App() {
 			<Route path="/DoctorViewResult" element={<DoctorViewResult />} />
 			<Route path="/PatientMainPage" element={<PatientMainPage />} />
 			<Route path="/PatientViewReport" element={<PatientViewReport />} />
+			<Route path="/CreateAccountPage" element={<CreateAccountPage />} />
 		</Routes>
 	</Router>
   );
