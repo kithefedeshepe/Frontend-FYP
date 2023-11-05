@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 function HomePage() {
   //for DEMO only
@@ -9,21 +10,55 @@ function HomePage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+  
+    try {
+      const response = await Axios.post('http://3.135.235.143:8000/api/login/', {
+        username,
+        password,
+      });
+      
+      if (response.status === 200) {
+        console.log(response.data);
 
-    if (username === 'doctor' && password === 'doctor') {
-      navigate('/DoctorMainPage'); // Redirect to the Doctor Page
-    } else if (username === 'patient' && password === 'patient') {
-      navigate('/PatientMainPage'); // Redirect to the Patient Page
-    } else {
-      alert('Invalid username or password');
+        // Extract the token from the response
+        const token = response.data.token;
+        // Store the token in localStorage
+        localStorage.setItem('token', token);
+        console.log('Token:', token);
+        console.log(`Token ${localStorage.getItem('token')}`);
+        
+        // USER AUTHENTICATION
+        const userResponse = await Axios.get('http://3.135.235.143:8000/api/userdetail/', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        // Successful login
+        console.log(localStorage.getItem('token'));
+        console.log(userResponse.data.role);
+        if (userResponse.data.role === 'doctor') {
+          navigate('/DoctorMainPage'); // Redirect to the Doctor Page
+        } else if (userResponse.data.role === 'patient') {
+          navigate('/PatientMainPage'); // Redirect to the Patient Page
+        } else {
+          console.log(userResponse.data);
+          alert('Invalid username or password');
+        }
+      } else {
+        alert('Invalid username or password');
+      }
+    } catch (error) {
+      alert('An error occurred during login. Please try again.');
+      console.error(error);
     }
+
   };
 
   return (
-  <html>
-    <body>
+
     <div className="homepage">
       <main>
         <h2 className="h2">WELCOME</h2>
@@ -65,9 +100,6 @@ function HomePage() {
       </main>
     </div>
 
-
-  </body>
-</html>
 
   );
 }

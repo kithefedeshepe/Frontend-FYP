@@ -5,122 +5,138 @@ import './PatientMainPage.css'; // Import your CSS file
 
 function PatientMainPage() {
   const [reports, setReports] = useState([]); // Initialize an empty array for reports
-  // Use useEffect to fetch data when the component mounts
-  /*  useEffect(() => {
-      axios.get('')
-        .then(response => {
-          const data = response.data;
-          setReports(data); // Update the state with fetched data
-        })
-        .catch(error => {
-          console.error('There was an error!', error);
-        });
-    }, []);*/
-  
-    let timeout;
-  
-    const checkReportAvailability = () =>
-    {
-      //get report status from backend
-      // *write code here*
-      /*var status = ...; //get status from back end
-        var available = "view-button-P";
-        var unavailable = "not-available";
-        if (status == true)
-        {
-          document.getElementById("MyElement").className = "view-button-P";
-        }else if (status == false){
-          document.getElementById("MyElement").className = "not-available";
+  let timeout;
+
+  useEffect(() => {
+    const fetchReports = async () => {
+      const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+      console.log(localStorage.getItem('token'));
+      if (token) {
+        try {
+          const response = await axios.get('http://3.135.235.143:8000/api/patient/report/', {
+            headers: {
+              'Authorization': `Bearer ${token}` // Use the token for authorization in the API call
+            }
+          });
+          setReports(response.data); // Assuming response.data is an array of reports
+        } catch (error) {
+          console.error("Error fetching data: ", error);
+          // Handle the error accordingly
         }
-      */
+      } else {
+        alert('Error: Missing session token')
+      }
+    };
+    fetchReports();
+  }, []);
+  
+  const Availability = async (rid, currentVisibility) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.patch(`http://3.135.235.143:8000/api/doctor/report/${rid}`, {
+        visibility: !currentVisibility // Toggle the current visibility status
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      // If the update is successful, reflect the change in the UI
+      if (response.status === 200) {
+        setReports(reports.map(report => 
+          report.rid === rid ? { ...report, visibility: !currentVisibility } : report
+        ));
+      }
+    } catch (error) {
+      console.error("Error updating report visibility: ", error);
+    }
+};
 
-    };
+  const handleMouseEnter = () =>
+  {
 
-    const handleMouseEnter = () =>
-    {
-  
-      clearTimeout(timeout);
-      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
-      dropdownContent.style.display = "block";
-      dropdownContent.classList.remove('hidden');
-  
-    };
-  
-    const handleMouseLeave = () =>
-    {
-  
-      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
-      timeout = setTimeout(() => {
-        dropdownContent.classList.add('hidden');
-        setTimeout(() => {
-          dropdownContent.style.display = "none";
-        }, 300); // 1000 milliseconds = 1 second
-      },200); // Adjust the delay time (1 second = 1000 milliseconds)
-   
-    };
-  
-    const contentHandleMouseEnter = () =>
-    {
-  
-      clearTimeout(timeout);
-  
-    };
-  
-    const contentHandleMouseLeave = () =>
-    {
-  
-      const dropdownContent = document.querySelector(".dropdown-content-menu_P");
-      const timeout = setTimeout(() => {
+    clearTimeout(timeout);
+    const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+    dropdownContent.style.display = "block";
+    dropdownContent.classList.remove('hidden');
+
+  };
+
+  const handleMouseLeave = () =>
+  {
+
+    const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+    timeout = setTimeout(() => {
       dropdownContent.classList.add('hidden');
-      }, 200); // Adjust the delay time (1 second = 1000 milliseconds)
       setTimeout(() => {
         dropdownContent.style.display = "none";
-      }, 500); // 1000 milliseconds = 1 second
-      
-    };
+      }, 300); // 1000 milliseconds = 1 second
+    },200); // Adjust the delay time (1 second = 1000 milliseconds)
   
-    const optionButtonHandleMouseEnter = () =>
-    {
-  
-      clearTimeout(timeout);
-      const dropdownContent = document.querySelector(".dropdown-content-option_P");
-      dropdownContent.style.display = "block";
-      dropdownContent.classList.remove('hidden');
-  
-    };
-  
-    const optionButtonHandleMouseLeave = () =>
-    {
-  
-      const dropdownContent = document.querySelector(".dropdown-content-option_P");
-      timeout = setTimeout(() => {
-        dropdownContent.classList.add('hidden');
-        setTimeout(() => {
-          dropdownContent.style.display = "none";
-        }, 300); // 1000 milliseconds = 1 second
-      },200); // Adjust the delay time (1 second = 1000 milliseconds)
-  
-    };
-  
-    const optionHandleMouseEnter = () =>
-    {
-  
-      clearTimeout(timeout);
-  
-    };
-  
-    const optionHandleMouseLeave = () =>
-    {
-  
-      const dropdownContent = document.querySelector(".dropdown-content-option_P");
-      const timeout = setTimeout(() => {
+  };
+
+  const contentHandleMouseEnter = () =>
+  {
+
+    clearTimeout(timeout);
+
+  };
+
+  const contentHandleMouseLeave = () =>
+  {
+
+    const dropdownContent = document.querySelector(".dropdown-content-menu_P");
+    const timeout = setTimeout(() => {
+    dropdownContent.classList.add('hidden');
+    }, 200); // Adjust the delay time (1 second = 1000 milliseconds)
+    setTimeout(() => {
+      dropdownContent.style.display = "none";
+    }, 500); // 1000 milliseconds = 1 second
+    
+  };
+
+  const optionButtonHandleMouseEnter = () =>
+  {
+
+    clearTimeout(timeout);
+    const dropdownContent = document.querySelector(".dropdown-content-option_P");
+    dropdownContent.style.display = "block";
+    dropdownContent.classList.remove('hidden');
+
+  };
+
+  const optionButtonHandleMouseLeave = () =>
+  {
+
+    const dropdownContent = document.querySelector(".dropdown-content-option_P");
+    timeout = setTimeout(() => {
       dropdownContent.classList.add('hidden');
-      }, 200); // Adjust the delay time (1 second = 1000 milliseconds)
       setTimeout(() => {
         dropdownContent.style.display = "none";
-      }, 500); // 1000 milliseconds = 1 second
-      
-    };
+      }, 300); // 1000 milliseconds = 1 second
+    },200); // Adjust the delay time (1 second = 1000 milliseconds)
+
+  };
+
+  const optionHandleMouseEnter = () =>
+  {
+
+    clearTimeout(timeout);
+
+  };
+
+  const optionHandleMouseLeave = () =>
+  {
+
+    const dropdownContent = document.querySelector(".dropdown-content-option_P");
+    const timeout = setTimeout(() => {
+    dropdownContent.classList.add('hidden');
+    }, 200); // Adjust the delay time (1 second = 1000 milliseconds)
+    setTimeout(() => {
+      dropdownContent.style.display = "none";
+    }, 500); // 1000 milliseconds = 1 second
+    
+  };
 
 
   return (
@@ -167,7 +183,7 @@ function PatientMainPage() {
             <thead>
               <tr>
                   <th>Report ID</th>
-                  <th>Doctor ID</th>
+                  <th>Doctor Name</th>
                   <th>Email</th>
                   <th>Status</th>
                   <th>Actions</th>
@@ -207,15 +223,21 @@ function PatientMainPage() {
             </tr>
 
               {reports.map(report => (
-                <tr key={report.id}>
-                  <td>{report.reportId}</td>
-                  <td>{report.patientId}</td>
-                  <td>{report.patientName}</td>
+                <tr key={report.rid}>
+                  <td>{report.rid}</td>
+                  <td>{report.doctor_name}</td>
                   <td>{report.email}</td>
-                  <td>{report.dateCreated}</td>
                   <td>{report.status}</td>
-                  <td>{report.dateReviewed}</td>
-                  <td>{report.visibility}</td>
+                  <td>
+                    <div className='action_cell'>
+                      <div className='action-button-container'>
+                        <Link id="action_link" className="view_result_link"
+                          to={"/PatientViewReport"}>
+                            <button id="view-button-P" title="View report" className="view-button-P"></button>
+                        </Link>
+                      </div>
+                    </div>
+                  </td>
                   <td>{/* Your additional data fields here */}</td>
                 </tr>
               ))}

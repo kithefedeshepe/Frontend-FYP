@@ -6,7 +6,7 @@ import './DoctorViewResult.css'; // Import your CSS file
 
 function DoctorViewResult() {
   const location = useLocation();
-  const { image } = location.state;
+  //const { image } = location.state;
   const [comment, setComment] = useState('');
   const navigate = useNavigate()
     // Function to handle the comment input change
@@ -183,8 +183,8 @@ function DoctorViewResult() {
             <label className="image-box-label">Anomaly areas</label>
           </div>
           <div className='images-box'>
-            <div><img src={image}  className='original-image'></img></div>
-            <div><img src={image}  className='anomaly-image'></img></div>
+          {/*<div><img src={image}  className='original-image'></img></div>
+            <div><img src={image}  className='anomaly-image'></img></div>*/}
           </div>
 
           {/* comment segment */}

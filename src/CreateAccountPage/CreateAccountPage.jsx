@@ -2,20 +2,26 @@ import React, { useState } from 'react';
 import './CreateAccountPage.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 function CreateAccountPage() {
+
+  const [userType, setUserType] = useState(''); // 'doctor' or 'patient'
+  const navigate = useNavigate();
 
     const doctor_checked = () =>{
         document.getElementById("patientCheckbox").checked = false;
         document.getElementById("spec-row").style.display = "flex";
+        setUserType('doctor');
     };
 
     const patient_checked = () =>{
         document.getElementById("doctorCheckbox").checked = false;
         document.getElementById("spec-row").style.display = "none";
+        setUserType('patient');
     };
-    const navigate = useNavigate()
-    const checkAndSubmit = (e) => {
+
+    const checkAndSubmit = async (e) => {
         e.preventDefault(); 
         const fname = document.getElementById("p-firstName").value;
         const lname = document.getElementById("p-lastName").value;
@@ -23,32 +29,80 @@ function CreateAccountPage() {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const confirm_password = document.getElementById("confirm_password").value;
+        const phone = document.getElementById("phone").value;
+        const username = document.getElementById("username").value;
+        const gender = document.getElementById("gender").value;
         const if_doc_checked = document.getElementById("doctorCheckbox").checked;
         const if_pat_checked = document.getElementById("patientCheckbox").checked;
-        const spec_row = document.getElementById("specilization").value;
-        if (if_doc_checked == false && if_pat_checked == false)
-        {
-            alert("Please fill in all fields!");
+        const specialization = document.getElementById("specialization").value;
 
-        }else if(fname == "" || lname == "" || age == "" || email == "" || password == "" || confirm_password == "")
-        {
-            alert("Please fill in all fields!");
-
-        }else if (password !== confirm_password)
-        {
-             alert("Password do no match!");
-        }else if (document.getElementById("doctorCheckbox").checked == true && spec_row == "")
-        {
-          alert("Please fill in all fields!");
-        } else{
-            //link here
-            navigate('/');
-        };
         
+
+        if (!userType) {
+          alert('Please select a user type (Doctor or Patient)');
+        } else if (fname === '' || lname === '' || age === '' || email === '' || password === '') {
+          alert('Please fill in all fields!');
+        } else if (password !== confirm_password) {
+          alert('Password does not match!');
+        } else if (userType === 'doctor' && specialization === '') {
+          alert('Please fill in specialization field!');
+        } else {
+          try {
+            if (userType === 'doctor') {
+              console.log(userType);
+              console.log(fname, lname, phone, gender, age, email, specialization);
+              const docResponse = await Axios.post(`http://3.135.235.143:8000/api/signup/doctor/`, {
+                username: username,
+                password: password,
+                profile:{
+                  first_name: fname,
+                  last_name: lname,
+                  email: email,
+                  phone_number: phone,
+                  age: age,
+                  gender: gender,
+                  specialization: specialization
+                }
+              });
+        
+              if (docResponse.status === 201) {
+                alert('Doctor account created successfully!');
+                navigate('/');
+              } else {
+                alert('Error creating doctor account. Please try again later.');
+              }
+              
+            } else if (userType === 'patient') {
+              console.log(userType);
+              const patResponse = await Axios.post(`http://3.135.235.143:8000/api/signup/patient/`, {
+                username: username,
+                password: password,
+                profile:{
+                  first_name: fname,
+                  last_name: lname,
+                  email: email,
+                  phone_number: phone,
+                  age: age,
+                  gender: gender
+                }
+              });
+        
+              if (patResponse.status === 201) {
+                alert('Patient account created successfully!');
+                navigate('/');
+              } else {
+                alert('Error creating patient account. Please try again later.');
+              }
+            }
+          } catch (error) {
+            console.error('AxiosError:', error);
+            alert('An error occurred while creating the account.');
+          }
+        }
     };
 
   return (
-  <html>
+  
     <body className='body'>
     
     <div className="create-account-box">
@@ -57,12 +111,13 @@ function CreateAccountPage() {
             <div className="role-box">
                 <div className='role-font'>
                     <b>Doctor: </b>
-                    <input class="role-check" onClick={doctor_checked} type="radio" id="doctorCheckbox" />
+                    <input className="role-check" onClick={doctor_checked} type="radio" id="doctorCheckbox" />
+
                 </div>
 
                 <div>
                     <b>Patient: </b>
-                    <input class="role-check" onClick={patient_checked} type="radio" id="patientCheckbox"  />
+                    <input className="role-check" onClick={patient_checked} type="radio" id="patientCheckbox"  />
                 </div>
             </div>
 
@@ -81,8 +136,8 @@ function CreateAccountPage() {
                 <div className='info-row'>
                   <label className='lable-info' htmlFor="gender">Gender :</label>
                   <select className='input-info' id="gender" name="gender" >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
                   </select>
                 </div>
 
@@ -97,6 +152,16 @@ function CreateAccountPage() {
                 </div>
 
                 <div className='info-row'>
+                  <label className='lable-info' htmlFor="phone">Phone :</label>
+                  <input className='input-info' id="phone" name="phone"/>
+                </div>
+
+                <div className='info-row'>
+                  <label className='lable-info' htmlFor="username">Username :</label>
+                  <input className='input-info' id="username" name="username"/>
+                </div>
+
+                <div className='info-row'>
                   <label className='lable-info' htmlFor="password">Password: </label>
                   <input className='input-info' type="password" id="password" name="password" />
                 </div>
@@ -107,8 +172,8 @@ function CreateAccountPage() {
 
 
                 <div id="spec-row" className='spec-row'>
-                    <label className='lable-info' htmlFor="specilization">Specilization: </label>
-                  <input className='input-info'id="specilization" name="specilization" />
+                    <label className='lable-info' htmlFor="specialization">Specilization: </label>
+                  <input className='input-info'id="specialization" name="specialization" />
                 </div>
 
                 <div className="create-button-container2">
@@ -122,7 +187,7 @@ function CreateAccountPage() {
     </div>
 
   </body>
-</html>
+
 
   );
 }
