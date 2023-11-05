@@ -103,26 +103,34 @@ function DoctorMainPage() {
   };
   
   const updateAvailability = async (rid, currentVisibility) => {
+    const newVisibility = !currentVisibility;
     const token = localStorage.getItem('token');
+  
+    // update the UI to reflect the user's action immediately
+    setReports(prevReports => prevReports.map(report => 
+      report.rid === rid ? { ...report, visibility: newVisibility } : report
+    ));
+  
     try {
-      const response = await axios.patch(`http://3.135.235.143:8000/api/doctor/report/${rid}`, {
-        visibility: !currentVisibility // Toggle the current visibility status
+      // Then attempt to update the server
+      console.log(`http://3.135.235.143:8000/api/doctor/report/${rid}/`);
+      await axios.patch(`http://3.135.235.143:8000/api/doctor/report/${rid}/`, {
+        visibility: newVisibility
       }, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      
-      // If the update is successful, reflect the change in the UI
-      if (response.status === 200) {
-        setReports(reports.map(report => 
-          report.rid === rid ? { ...report, visibility: !currentVisibility } : report
-        ));
-      }
     } catch (error) {
       console.error("Error updating report visibility: ", error);
+      // If the server update fails, revert the change in the UI
+      setReports(prevReports => prevReports.map(report => 
+        report.rid === rid ? { ...report, visibility: currentVisibility } : report
+      ));
+      // Optionally, inform the user that the update failed
+      alert('Failed to update visibility. Please try again.');
     }
-};
+  };
 
   return (
     <html>
@@ -165,7 +173,7 @@ function DoctorMainPage() {
         </div>
       </div>
       
-    
+      {/*DASHBOARD*/}
       <div className="table-container">
           <table className="data-table">
             <thead>
@@ -199,8 +207,12 @@ function DoctorMainPage() {
                   </td>
                   <td>
                     <div className='action-button-container'>
-                      <input id={`release-checkbox-${report.rid}`} className="availability-input" onChange={() => updateAvailability(report.rid, report.visibility)}
-                       type="checkbox">
+                      <input
+                        id={`release-checkbox-${report.rid}`}
+                        className="availability-input"
+                        type="checkbox"
+                        checked={report.visibility} // Ensure this expression evaluates to a boolean
+                        onChange={() => updateAvailability(report.rid, report.visibility)}>
                       </input>
                     </div>
                   </td>

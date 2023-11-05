@@ -30,27 +30,21 @@ function PatientMainPage() {
     fetchReports();
   }, []);
   
-  const Availability = async (rid, currentVisibility) => {
-    const token = localStorage.getItem('token');
-    try {
-      const response = await axios.patch(`http://3.135.235.143:8000/api/doctor/report/${rid}`, {
-        visibility: !currentVisibility // Toggle the current visibility status
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      
-      // If the update is successful, reflect the change in the UI
-      if (response.status === 200) {
-        setReports(reports.map(report => 
-          report.rid === rid ? { ...report, visibility: !currentVisibility } : report
-        ));
+  const checkReportAvailability = () =>
+  {
+    //get report status from backend
+    // *write code here*
+    /*var status = ...; //get status from back end
+      var available = "view-button-P";
+      var unavailable = "not-available";
+      if (status == true)
+      {
+        document.getElementById("MyElement").className = "view-button-P";
+      }else if (status == false){
+        document.getElementById("MyElement").className = "not-available";
       }
-    } catch (error) {
-      console.error("Error updating report visibility: ", error);
-    }
-};
+    */
+  };
 
   const handleMouseEnter = () =>
   {
@@ -187,41 +181,9 @@ function PatientMainPage() {
                   <th>Email</th>
                   <th>Status</th>
                   <th>Actions</th>
-                  
               </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>RID123</td>
-              <td>Johnny signs</td>
-              <td>johnnysigns@email.com</td>
-              <td>Negative</td>
-              <td>
-                <div className='action_cell'>
-                  <div className='action-button-container'>
-                    <Link id="action_link" className="view_result_link"
-                      to={"/PatientViewReport"}>
-                        <button id="view-button-P" title="View report" className="view-button-P"></button>
-                    </Link>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>RID123</td>
-              <td>Johnny signs</td>
-              <td>johnnysigns@email.com</td>
-              <td>Pending</td>
-              <td>
-                <div className='action_cell'>
-                  <div className='action-button-container'>
-                        <button disabled id="view-button-P" title="Not available" className="not-available"></button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
               {reports.map(report => (
                 <tr key={report.rid}>
                   <td>{report.rid}</td>
@@ -233,12 +195,18 @@ function PatientMainPage() {
                       <div className='action-button-container'>
                         <Link id="action_link" className="view_result_link"
                           to={"/PatientViewReport"}>
-                            <button id="view-button-P" title="View report" className="view-button-P"></button>
+                            <button
+                              id={`view-report-${report.rid}`} 
+                              title={report.visibility ? "View report" : "Report not available"}
+                              className={report.visibility ? "view-button-P" : "not-available"}
+                              disabled={!report.visibility} // Button is disabled if report.visibility is false
+                            >
+                              {report.visibility ? "" : ""}
+                            </button>
                         </Link>
                       </div>
                     </div>
                   </td>
-                  <td>{/* Your additional data fields here */}</td>
                 </tr>
               ))}
             </tbody>
