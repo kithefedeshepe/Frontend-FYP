@@ -364,3 +364,36 @@ form {
   flex-direction: column;
   gap: 10px;
 }
+
+.dropdown-content-option {
+  display: none;
+  position:absolute;
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 15px;
+  top: 75px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.dropdown-content-option.hidden {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.dropdown-content-option a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.dropdown-content-option a:hover {
+  background-color: #11325c;
+  color: white;
+  transform: scale(1.2);
+}

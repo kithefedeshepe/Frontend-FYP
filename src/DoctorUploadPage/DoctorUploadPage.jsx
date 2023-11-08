@@ -1,12 +1,13 @@
 import React, { useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './DoctorUploadPage.css'; // Import your CSS file
 
 function DoctorUploadPage() {
   //const [reports, setReports] = useState([]); // Initialize an empty array for reports
   const [selectedImage, setSelectedImage] = useState(null); // State to store the selected image
-
+  const navigate = useNavigate()
+  
   // Function to handle file input change
   const handleImageChange = (event) =>
   {
@@ -155,6 +156,14 @@ function DoctorUploadPage() {
     
   };
 
+  const logout = () => {
+    // Clear the token from local storage
+    localStorage.removeItem('token');
+
+    // Navigate to the home page, replacing the current entry in the history stack
+    navigate('/', { replace: true });
+  };
+
   return (
     <html>
       <body className = "body">
@@ -189,7 +198,7 @@ function DoctorUploadPage() {
               onMouseLeave={optionHandleMouseLeave}
               class="dropdown-content-option">
                 {/* <Link to="#">Profile</Link> */}
-                <Link to="/">Logout</Link>
+                <div onClick={logout}>Logout</div>
               </div>
             </div>
 

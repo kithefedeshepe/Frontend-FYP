@@ -26,7 +26,7 @@ function DoctorMainPage() {
           // Handle the error accordingly
         }
       } else {
-        alert('Error: Missing session token')
+        //alert('Error: Missing session token')
       }
     };
     fetchReports();
@@ -140,6 +140,14 @@ function DoctorMainPage() {
     }
   };
 
+  const logout = () => {
+    // Clear the token from local storage
+    localStorage.removeItem('token');
+
+    // Navigate to the home page, replacing the current entry in the history stack
+    navigate('/', { replace: true });
+  };
+
   return (
     <html>
       <body className='body'>
@@ -173,10 +181,10 @@ function DoctorMainPage() {
           <div
           onMouseEnter={optionHandleMouseEnter}
           onMouseLeave={optionHandleMouseLeave}
-          class="dropdown-content-option">
+          class="dropdown-content-option" onClick={logout}>
             {/*TO REMOVE AND REPLACE WITH REAL LOGOUT BACKEND*/}
             {/* <Link to="#">Profile</Link> */}
-            <Link to="/">Logout</Link>
+            <div onClick={logout}>Logout</div>
           </div>
         </div>
       </div>

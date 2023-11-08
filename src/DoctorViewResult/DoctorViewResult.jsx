@@ -168,6 +168,14 @@ function DoctorViewResult() {
     
   };
 
+  const logout = () => {
+    // Clear the token from local storage
+    localStorage.removeItem('token');
+
+    // Navigate to the home page, replacing the current entry in the history stack
+    navigate('/', { replace: true });
+  };
+
   return (
     <html>
       <body className = "body">
@@ -203,7 +211,7 @@ function DoctorViewResult() {
                 onMouseEnter={optionHandleMouseEnter}
                 onMouseLeave={optionHandleMouseLeave}
                 class="dropdown-content-option">
-                  <Link to="/">Logout</Link>
+                  <div onClick={logout}>Logout</div>
               </div>
 
             </div>
