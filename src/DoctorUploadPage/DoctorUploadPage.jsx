@@ -198,7 +198,7 @@ function DoctorUploadPage() {
               onMouseLeave={optionHandleMouseLeave}
               class="dropdown-content-option">
                 {/* <Link to="#">Profile</Link> */}
-                <div onClick={logout}>Logout</div>
+                <a onClick={logout}>Logout</a>
               </div>
             </div>
 

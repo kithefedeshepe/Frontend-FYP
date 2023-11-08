@@ -27,6 +27,7 @@ function DoctorMainPage() {
         }
       } else {
         //alert('Error: Missing session token')
+        navigate('/');
       }
     };
     fetchReports();
@@ -183,8 +184,7 @@ function DoctorMainPage() {
           onMouseLeave={optionHandleMouseLeave}
           class="dropdown-content-option" onClick={logout}>
             {/*TO REMOVE AND REPLACE WITH REAL LOGOUT BACKEND*/}
-            {/* <Link to="#">Profile</Link> */}
-            <div onClick={logout}>Logout</div>
+            <a onClick={logout}>Logout</a>
           </div>
         </div>
       </div>

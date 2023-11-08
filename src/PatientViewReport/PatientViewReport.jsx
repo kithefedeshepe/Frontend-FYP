@@ -23,26 +23,39 @@ function PatientViewReport() {
   });
 
   useEffect(() => {
-    // Get rid either from the state or from localStorage
+    const token = localStorage.getItem('token');
     const reportId = rid || localStorage.getItem('selectedReportId');
-    
-    if (reportId) {
-      const fetchReportDetails = async () => {
-        try {
-          const response = await axios.get(`http://3.135.235.143:8000/api/patient/getReport/${reportId}/`);
-          setReportDetails(response.data);
-          setComment(response.data.description);
-        } catch (error) {
-          console.error("Error fetching report details: ", error);
-        }
-      };
-      fetchReportDetails();
+
+    if (!token) {
+      // Redirect to login if there's no token
+      navigate('/', { replace: true });
+    } else if (reportId) {
+      // Fetch report details if the token exists
+      fetchReportDetails(reportId, token);
     } else {
-      // Handle the scenario where there is no reportId
       alert('No report selected.');
-      navigate('/PatientMainPage'); // Redirect to the main page or handle accordingly
+      navigate('/DoctorMainPage');
     }
-  }, []);
+  }, [navigate, rid]);
+
+  const fetchReportDetails = async (reportId, token) => {
+    try {
+      const response = await axios.get(`http://3.135.235.143:8000/api/patient/getReport/${reportId}/`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      setReportDetails(response.data);
+      setComment(response.data.description);
+    } catch (error) {
+      console.error("Error fetching report details: ", error);
+      if (error.response && error.response.status === 401) {
+        // Token might be invalid, clear it and redirect to login
+        localStorage.removeItem('token');
+        navigate('/login', { replace: true });
+      }
+    }
+  };
 
     // Add state variable to store the comment
     const [comment, setComment] = useState('');
@@ -192,7 +205,7 @@ function PatientViewReport() {
         onMouseLeave={optionHandleMouseLeave}
         class="dropdown-content-option_P">
           {/* <Link to="#">Profile</Link> */}
-          <div onClick={logout}>Logout</div>
+          <a onClick={logout}>Logout</a>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import axios from 'axios';
 import './DoctorViewResult.css'; // Import your CSS file
 
 function DoctorViewResult() {
+  const navigate = useNavigate();
   const location = useLocation();
   const rid = location.state?.rid; // Get the passed 'rid' from the location state
   const [reportDetails, setReportDetails] = useState({
@@ -19,31 +20,43 @@ function DoctorViewResult() {
   });
 
   useEffect(() => {
-    // Get rid either from the state or from localStorage
+    const token = localStorage.getItem('token');
     const reportId = rid || localStorage.getItem('selectedReportId');
-    
-    if (reportId) {
-      const fetchReportDetails = async () => {
-        try {
-          const response = await axios.get(`http://3.135.235.143:8000/api/doctor/getReport/${reportId}/`);
-          setReportDetails(response.data);
-          setComment(response.data.description);
-        } catch (error) {
-          console.error("Error fetching report details: ", error);
-        }
-      };
-      fetchReportDetails();
+
+    if (!token) {
+      // Redirect to login if there's no token
+      navigate('/', { replace: true });
+    } else if (reportId) {
+      // Fetch report details if the token exists
+      fetchReportDetails(reportId, token);
     } else {
-      // Handle the scenario where there is no reportId
       alert('No report selected.');
-      navigate('/DoctorMainPage'); // Redirect to the main page or handle accordingly
+      navigate('/DoctorMainPage');
     }
-  }, []);
+  }, [navigate, rid]);
+
+  const fetchReportDetails = async (reportId, token) => {
+    try {
+      const response = await axios.get(`http://3.135.235.143:8000/api/doctor/getReport/${reportId}/`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      setReportDetails(response.data);
+      setComment(response.data.description);
+    } catch (error) {
+      console.error("Error fetching report details: ", error);
+      if (error.response && error.response.status === 401) {
+        // Token might be invalid, clear it and redirect to login
+        localStorage.removeItem('token');
+        navigate('/login', { replace: true });
+      }
+    }
+  };
 
 
   //const { image } = location.state;
   const [comment, setComment] = useState('');
-  const navigate = useNavigate()
 
   const handleCommentChange = (event) => {
     setComment(event.target.value); // Update the comment state, not reportDetails
@@ -211,7 +224,7 @@ function DoctorViewResult() {
                 onMouseEnter={optionHandleMouseEnter}
                 onMouseLeave={optionHandleMouseLeave}
                 class="dropdown-content-option">
-                  <div onClick={logout}>Logout</div>
+                  <a onClick={logout}>Logout</a>
               </div>
 
             </div>

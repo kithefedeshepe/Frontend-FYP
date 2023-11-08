@@ -166,7 +166,7 @@ function PatientMainPage() {
             onMouseLeave={optionHandleMouseLeave}
             class="dropdown-content-option_P">
               {/* <Link to="#">Profile</Link> */}
-              <div onClick={logout}>Logout</div>
+              <a onClick={logout}>Logout</a>
             </div>
           </div>
         </div>
