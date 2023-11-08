@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './PatientMainPage.css'; // Import your CSS file
 
 function PatientMainPage() {
   const [reports, setReports] = useState([]); // Initialize an empty array for reports
+  const navigate = useNavigate();
   let timeout;
 
   useEffect(() => {
@@ -30,20 +31,11 @@ function PatientMainPage() {
     fetchReports();
   }, []);
   
-  const checkReportAvailability = () =>
-  {
-    //get report status from backend
-    // *write code here*
-    /*var status = ...; //get status from back end
-      var available = "view-button-P";
-      var unavailable = "not-available";
-      if (status == true)
-      {
-        document.getElementById("MyElement").className = "view-button-P";
-      }else if (status == false){
-        document.getElementById("MyElement").className = "not-available";
-      }
-    */
+  const handleReportClick = (rid) => {
+    // Store the rid in localStorage before navigating
+    localStorage.setItem('selectedReportId', rid);
+    // Navigate to DoctorViewResult
+    navigate('/PatientViewReport');
   };
 
   const handleMouseEnter = () =>
@@ -154,7 +146,7 @@ function PatientMainPage() {
           </div>
 
           <div className="header">COVID-19 Imaging System</div>
-          <div className="drName">Jane Doe</div>
+          <div className="drName"></div>
 
           <div class="dropdown">
             <button
@@ -194,6 +186,7 @@ function PatientMainPage() {
                     <div className='action_cell'>
                       <div className='action-button-container'>
                         <Link id="action_link" className="view_result_link"
+                          onClick={() => handleReportClick(report.rid)}
                           to={"/PatientViewReport"}>
                             <button
                               id={`view-report-${report.rid}`} 

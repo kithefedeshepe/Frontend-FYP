@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './DoctorMainPage.css'; // Import your CSS file
 
 function DoctorMainPage() {
 
+  const navigate = useNavigate();
   const [reports, setReports] = useState([]); // Initialize an empty array for reports
   let timeout;
 
@@ -31,6 +32,12 @@ function DoctorMainPage() {
     fetchReports();
   }, []);
 
+  const handleReportClick = (rid) => {
+    // Store the rid in localStorage before navigating
+    localStorage.setItem('selectedReportId', rid);
+    // Navigate to DoctorViewResult
+    navigate('/DoctorViewResult');
+  };
 
   const handleMouseEnter = () =>
   {
@@ -102,6 +109,7 @@ function DoctorMainPage() {
     }, 500); // 1000 milliseconds = 1 second
   };
   
+  //KIV
   const updateAvailability = async (rid, currentVisibility) => {
     const newVisibility = !currentVisibility;
     const token = localStorage.getItem('token');
@@ -113,8 +121,8 @@ function DoctorMainPage() {
   
     try {
       // Then attempt to update the server
-      console.log(`http://3.135.235.143:8000/api/doctor/report/${rid}/`);
-      await axios.patch(`http://3.135.235.143:8000/api/doctor/report/${rid}/`, {
+      console.log(`http://3.135.235.143:8000/api/report/${rid}/`);
+      await axios.put(`http://3.135.235.143:8000/api/report/${rid}/`, {
         visibility: newVisibility
       }, {
         headers: {
@@ -154,7 +162,7 @@ function DoctorMainPage() {
           </div> 
 
         <div className="header">COVID-19 Imaging System</div>
-        <div className="drName">Dr Johnny</div>
+        <div className="drName"></div>
 
         <div class="dropdown">
           <button
@@ -198,10 +206,12 @@ function DoctorMainPage() {
                   <td>
                     <div className='action_cell'>
                       <div className='action-button-container'>
-                        <Link id="action_link" className="view_result_link"
-                          to={"/DoctorViewResult"}>
-                            <button id="edit-report-button" title="Edit comment" className="edit-report-button"></button>
-                        </Link>
+                      <Link
+                        to="/DoctorViewResult"
+                        onClick={() => handleReportClick(report.rid)}
+                      >
+                        <button id="edit-report-button" title="Edit comment" className="edit-report-button"></button>
+                      </Link>
                       </div>
                     </div>
                   </td>
@@ -211,7 +221,7 @@ function DoctorMainPage() {
                         id={`release-checkbox-${report.rid}`}
                         className="availability-input"
                         type="checkbox"
-                        checked={report.visibility} // Ensure this expression evaluates to a boolean
+                        checked={report.visibility} 
                         onChange={() => updateAvailability(report.rid, report.visibility)}>
                       </input>
                     </div>

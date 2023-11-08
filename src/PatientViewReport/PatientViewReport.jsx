@@ -1,22 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PatientViewReport.css'; // Import your CSS file
 
 function PatientViewReport() {
+  const navigate = useNavigate()
+  const location = useLocation();
+  const rid = location.state?.rid; // Get the passed 'rid' from the location state
+  const [reportDetails, setReportDetails] = useState({
+    patient_id: '',
+    patient_first_name: '',
+    patient_last_name: '',
+    patient_gender: '',
+    patient_age: '',
+    doctor_id: '',
+    doctor_first_name: '', //KIV
+    doctor_last_name: '', //KIV
+    description: '',
+    status: '',
+  });
 
-  const [reports, setReports] = useState([]); // Initialize an empty array for reports
-  // Use useEffect to fetch data when the component mounts
-  /*  useEffect(() => {
-      axios.get('')
-        .then(response => {
-          const data = response.data;
-          setReports(data); // Update the state with fetched data
-        })
-        .catch(error => {
-          console.error('There was an error!', error);
-        });
-    }, []);*/
+  useEffect(() => {
+    // Get rid either from the state or from localStorage
+    const reportId = rid || localStorage.getItem('selectedReportId');
+    
+    if (reportId) {
+      const fetchReportDetails = async () => {
+        try {
+          const response = await axios.get(`http://3.135.235.143:8000/api/patient/getReport/${reportId}/`);
+          setReportDetails(response.data);
+          setComment(response.data.description);
+        } catch (error) {
+          console.error("Error fetching report details: ", error);
+        }
+      };
+      fetchReportDetails();
+    } else {
+      // Handle the scenario where there is no reportId
+      alert('No report selected.');
+      navigate('/PatientMainPage'); // Redirect to the main page or handle accordingly
+    }
+  }, []);
 
     // Add state variable to store the comment
     const [comment, setComment] = useState('');
@@ -120,6 +146,7 @@ function PatientViewReport() {
       var w=window.open();
       w.document.write(printContents);
       w.print();
+      localStorage.removeItem('selectedReportId');
       w.close();
     };
   return (
@@ -143,7 +170,7 @@ function PatientViewReport() {
       </div>
 
       <div className="header">COVID-19 Imaging System</div>
-      <div className="drName">Jane Doe</div>
+      <div className="drName"></div>
 
       <div class="dropdown">
         <button
@@ -169,7 +196,7 @@ function PatientViewReport() {
 
             <div class="patient_view-report-id-row">
               <div class="id-margin">Patient ID :</div>
-              <input class="id-input-space"type="text" id="patientID" name="patientD" value="000001" />
+              <input class="id-input-space"type="text" id="patientID" name="patientD" value={reportDetails?.patient_id || ''} />
               <div className='for-alignment'></div>
               <div className='for-alignment'></div>
               <div className='for-alignment'></div>
@@ -177,21 +204,21 @@ function PatientViewReport() {
 
             <div class="patient_view-report-name-row">
               <div class="id-margin">First Name :</div>
-              <input class="id-input-space"type="text" id="patientFirstName" name="patientFirstName" value="Jack" />
+              <input class="id-input-space"type="text" id="patientFirstName" name="patientFirstName" value={reportDetails?.patient_first_name|| ''} />
               <div class="id-margin">Last Name :</div>
-              <input class="id-input-space"type="text" id="patientLastName" name="patientLastName" value="Daniels" />
+              <input class="id-input-space"type="text" id="patientLastName" name="patientLastName" value={reportDetails?.patient_last_name|| ''} />
             </div>
 
             <div class="patient_view-report-name-row">
               <div class="id-margin">Gender :</div>
-              <input class="id-input-space"type="text" id="patientGender" name="patientGender" value="M" />
+              <input class="id-input-space"type="text" id="patientGender" name="patientGender" value={reportDetails?.patient_gender|| ''} />
               <div class="id-margin">Age :</div>
-              <input class="id-input-space"type="text" id="patientAge" name="patientAge" value="69" />
+              <input class="id-input-space"type="text" id="patientAge" name="patientAge" value={reportDetails?.patient_age|| ''} />
             </div>
 
             <div class="patient_view-report-id-row">
               <div class="id-margin">Doctor ID :</div>
-              <input class="id-input-space"type="text" id="doctorID" name="doctorID" value="000001" />
+              <input class="id-input-space"type="text" id="doctorID" name="doctorID" value={reportDetails?.doctor_id|| ''} />
               <div className='for-alignment'></div>
               <div className='for-alignment'></div>
               <div className='for-alignment'></div>
@@ -199,22 +226,24 @@ function PatientViewReport() {
 
             <div class="patient_view-report-name-row">
               <div class="id-margin">First Name :</div>
-              <input class="id-input-space"type="text" id="doctorFirstName" name="doctorFirstName" value="Jack" />
+              <input class="id-input-space"type="text" id="doctorFirstName" name="doctorFirstName" value={reportDetails?.doctor_first_name|| ''} />
               <div class="id-margin">Last Name :</div>
-              <input class="id-input-space"type="text" id="doctorLastName" name="doctorLastName" value="Daniels" />
+              <input class="id-input-space"type="text" id="doctorLastName" name="doctorLastName" value={reportDetails?.doctor_last_name|| ''} />
             </div>
 
-            <div class="patient_view-report-last-row">
+            <div class="view-report-last-row">
               <div class="id-margin">Diagnosis :</div>
-              <input class="view-report-negative-checkbox"type="checkbox" id="covidNegative" name="covidNegative" value="Negative" disabled/>
+              <input class="view-report-negative-checkbox"type="checkbox" id="covidNegative" name="covidNegative" value="NEGATIVE" checked={reportDetails.status === 'Normal'} disabled/>
               <div class="view-report-checkbox-font"><b>Negative</b></div>
-              <input class="view-report-positive-checkbox"type="checkbox" id="covidPositive" name="covidPositive" value="Positive" checked disabled/>
+              <input class="view-report-positive-checkbox"type="checkbox" id="covidPositive" name="covidPositive" value="COVID" checked={reportDetails.status === 'COVID'} disabled/>
               <div class="view-report-checkbox-font"><b>Positive</b></div>
+              <input class="view-report-positive-checkbox" type="checkbox" id="viralPneumonia" name="viralPneumonia" value="VIRAL PNUEMONIA" checked={reportDetails.status === 'Viral Pneumonia'} disabled/>
+              <div class="view-report-checkbox-font"><b>Viral Pneumonia</b></div>
             </div>
             
             {/* comment segment */}
-            <label className="patient-view-report-comment-label">Doctor's comment: </label>
-            <textarea className="doctor_comment"></textarea>
+            <label className="patient-view-report-comment-label" >Doctor's comment: </label>
+            <textarea className="doctor_comment" value={reportDetails?.description|| ''}></textarea>
           </div>
 
           <div className="patient-view-report-submit-container">

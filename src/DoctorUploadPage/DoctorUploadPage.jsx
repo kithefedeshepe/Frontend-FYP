@@ -176,7 +176,7 @@ function DoctorUploadPage() {
             </div>
 
             <div className="header">COVID-19 Imaging System</div>
-            <div className="drName">Dr Johnny</div>
+            <div className="drName"></div>
 
             <div class="dropdown">
               <button

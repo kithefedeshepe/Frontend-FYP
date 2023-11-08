@@ -214,7 +214,6 @@
   width: 20px;
   height: 20px;
   display: inline-block;
-  filter: invert(100%) hue-rotate(18deg) brightness(5);
 }
 
 .view-report-checkbox-font{

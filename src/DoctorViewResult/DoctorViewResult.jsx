@@ -2,20 +2,86 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './DoctorViewResult.css'; // Import your CSS file
 
 function DoctorViewResult() {
   const location = useLocation();
+  const rid = location.state?.rid; // Get the passed 'rid' from the location state
+  const [reportDetails, setReportDetails] = useState({
+    patient_id: '',
+    patient_first_name: '',
+    patient_last_name: '',
+    patient_gender: '',
+    patient_age: '',
+    description: '',
+    status: '',
+  });
+
+  useEffect(() => {
+    // Get rid either from the state or from localStorage
+    const reportId = rid || localStorage.getItem('selectedReportId');
+    
+    if (reportId) {
+      const fetchReportDetails = async () => {
+        try {
+          const response = await axios.get(`http://3.135.235.143:8000/api/doctor/getReport/${reportId}/`);
+          setReportDetails(response.data);
+          setComment(response.data.description);
+        } catch (error) {
+          console.error("Error fetching report details: ", error);
+        }
+      };
+      fetchReportDetails();
+    } else {
+      // Handle the scenario where there is no reportId
+      alert('No report selected.');
+      navigate('/DoctorMainPage'); // Redirect to the main page or handle accordingly
+    }
+  }, []);
+
+
   //const { image } = location.state;
   const [comment, setComment] = useState('');
   const navigate = useNavigate()
-    // Function to handle the comment input change
-  const handleCommentSubmit = (event) =>
-  {
 
-    setComment(event.target.value);
-    navigate('/DoctorMainPage');
+  const handleCommentChange = (event) => {
+    setComment(event.target.value); // Update the comment state, not reportDetails
+  };
 
+  const handleCommentSubmit = async () => {
+    // Check if the comment has been changed
+    if (comment.trim() === '') {
+      alert('Comment cannot be empty.'); // Alert the user if the comment is empty
+      return; // Exit the function early if no comment is provided
+    }
+    
+    // Check if the comment is unchanged
+    if (comment === reportDetails.description) {
+      alert('No changes to save.'); // Alert the user that there are no changes
+      return; // Exit the function early if there are no changes
+    }
+  
+    // If the comment is changed, proceed to submit it
+    try {
+      const reportId = rid || localStorage.getItem('selectedReportId');
+      const response = await axios.put(`http://3.135.235.143:8000/api/doctor/updateReport/${reportId}/`, {
+        description: comment // Send the updated comment
+      });
+      
+      // Handle the response accordingly
+      if (response.status === 200) {
+        alert('Comment updated successfully!');
+        navigate('/DoctorMainPage'); // Navigate to the main page after successful submission
+        localStorage.removeItem('selectedReportId');
+      } else {
+        // Handle any other HTTP status codes as needed
+        alert('Failed to update the comment. Please try again.');
+      }
+    } catch (error) {
+      console.error("Error submitting the updated comment: ", error);
+      alert('Error submitting the updated comment. Please try again.'); // Provide feedback to the user
+    }
   };
 
   let timeout;
@@ -125,7 +191,7 @@ function DoctorViewResult() {
           </div>
 
             <div className="header">COVID-19 Imaging System</div>
-            <div className="drName">Dr Johnny</div>
+            <div className="drName"></div>
             <div class="dropdown">
 
               <button
@@ -150,7 +216,7 @@ function DoctorViewResult() {
 
           <div class="view-report-id-row">
             <div class="id-margin">Patient ID :</div>
-            <input class="id-input-space"type="text" id="patientID" name="patientD" value="000001" />
+            <input class="id-input-space"type="text" id="patientID" name="patientID" value={reportDetails?.patient_id || ''} />
             <div className='for-alignment'></div>
             <div className='for-alignment'></div>
             <div className='for-alignment'></div>
@@ -158,24 +224,26 @@ function DoctorViewResult() {
 
           <div class="view-report-name-row">
             <div class="id-margin">First Name :</div>
-            <input class="id-input-space"type="text" id="patientFirstName" name="patientFirstName" value="Jack" />
+            <input class="id-input-space"type="text" id="patientFirstName" name="patientFirstName" value={reportDetails?.patient_first_name|| ''} />
             <div class="id-margin">Last Name :</div>
-            <input class="id-input-space"type="text" id="patientLastName" name="patientLastName" value="Daniels" />
+            <input class="id-input-space"type="text" id="patientLastName" name="patientLastName" value={reportDetails?.patient_last_name|| ''} />
           </div>
 
           <div class="view-report-name-row">
             <div class="id-margin">Gender :</div>
-            <input class="id-input-space"type="text" id="patientGender" name="patientGender" value="M" />
+            <input class="id-input-space"type="text" id="patientGender" name="patientGender" value={reportDetails?.patient_gender|| ''} />
             <div class="id-margin">Age :</div>
-            <input class="id-input-space"type="text" id="patientAge" name="patientAge" value="69" />
+            <input class="id-input-space"type="text" id="patientAge" name="patientAge" value={reportDetails?.patient_age|| ''} />
           </div>
 
           <div class="view-report-last-row">
             <div class="id-margin">Diagnosis :</div>
-            <input class="view-report-negative-checkbox"type="checkbox" id="covidNegative" name="covidNegative" value="Negative" disabled/>
+            <input class="view-report-negative-checkbox"type="checkbox" id="covidNegative" name="covidNegative" value="NEGATIVE" checked={reportDetails.status === 'Normal'} disabled/>
             <div class="view-report-checkbox-font"><b>Negative</b></div>
-            <input class="view-report-positive-checkbox"type="checkbox" id="covidPositive" name="covidPositive" value="Positive" checked disabled/>
+            <input class="view-report-positive-checkbox"type="checkbox" id="covidPositive" name="covidPositive" value="COVID" checked={reportDetails.status === 'COVID'} disabled/>
             <div class="view-report-checkbox-font"><b>Positive</b></div>
+            <input class="view-report-positive-checkbox" type="checkbox" id="viralPneumonia" name="viralPneumonia" value="VIRAL PNUEMONIA" checked={reportDetails.status === 'Viral Pneumonia'} disabled/>
+            <div class="view-report-checkbox-font"><b>Viral Pneumonia</b></div>
           </div>
           
           <div className='label-container'>
@@ -189,9 +257,13 @@ function DoctorViewResult() {
 
           {/* comment segment */}
           <label className="view-report-comment-label">Comments for patient :</label>
-          <textarea className="view-report-comment-box"></textarea>
+          <textarea 
+            className="view-report-comment-box" 
+            value={comment} // Use the comment state here
+            onChange={handleCommentChange}> // Update the comment state when the textarea changes
+          </textarea>
           <div className="view-report-submit-container">
-            <button className="view-report-submit-button" onClick={handleCommentSubmit} >Submit</button>
+            <button className="view-report-submit-button" onClick={handleCommentSubmit}>Submit</button>
           </div>
 
         </div>
