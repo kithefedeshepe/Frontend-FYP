@@ -26,6 +26,7 @@ function PatientMainPage() {
         }
       } else {
         //alert('Error: Missing session token')
+        navigate('/');
       }
     };
     fetchReports();
