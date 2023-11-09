@@ -273,6 +273,7 @@
 }
 
 .images-box{
+  justify-content: space-between;/*NEW*/
   display: flex;
   margin: 0 auto 10px; /* Center-align the comment box */
   width: 710px; /* Adjust the width as needed */
@@ -283,6 +284,12 @@
   background-color: white;
   position: relative; /* For positioning the image inside the container */
   overflow: hidden; /* Hide overflowing parts of the image */
+}
+
+.image-container {
+  width: 50%;
+  text-align: center; 
+  padding: 10px; 
 }
 
 .original-image{

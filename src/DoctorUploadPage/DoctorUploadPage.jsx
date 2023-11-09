@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './DoctorUploadPage.css'; // Import your CSS file
@@ -7,82 +7,142 @@ function DoctorUploadPage() {
   //const [reports, setReports] = useState([]); // Initialize an empty array for reports
   const [selectedImage, setSelectedImage] = useState(null); // State to store the selected image
   const navigate = useNavigate()
+  const [result, setResult] = useState(null);
+
+  useEffect(() => {
+    // Check for the presence of a token in local storage
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // If no token is found, navigate to the login page or any other page you prefer
+      navigate('/');
+    }
+  }, [navigate]);
   
   // Function to handle file input change
   const handleImageChange = (event) =>
   {
-
     const file = event.target.files[0]; // Get the selected file
     if (file)
     {
-
       const imageUrl = URL.createObjectURL(file); // Create a URL for the selected image
       setSelectedImage(imageUrl); // Set the selected image URL in state
-
     }
-    
   };
 
   const handleSubmit = (event) =>
   {
-    
     event.preventDefault(); // Prevent the default form submission behavior
-
     // Access form data and selected image URL
     const formData = new FormData(event.target);
     const selectedImageURL = formData.get('selectedImage');
     // Now you can access formData to send it to your server or perform other actions
     console.log('Form Data:', formData);
     console.log('Selected Image URL:', selectedImageURL);
-
   };
 
-  const checkNULL = (e) =>
-  {
+  const analyzeIMG = async (e) => {
     e.preventDefault();
-    //insert var to set boolean for if it is a xray image
-    //var isLung = ...;
-    if (selectedImage == null /*|| isLung == false */ )
-    {
-      if (selectedImage == null)
-      {
+  
+    if (selectedImage == null || document.getElementById("patientID").value === "") {
+      if (selectedImage == null) {
         alert("Please upload an image!");
       }
-      /*
-      if (isLung == false)
-      {
-        alert("This is not a lung X-Ray!");
+      if (document.getElementById("patientID").value === "") {
+        alert("Please fill in all fields!");
       }
-      */
-    }else if (document.getElementById("patientID").value == "")
-    {
-      alert("Please fill in all fields!");
-    }else{
-      setTimeout
-      (() =>{
-        document.getElementById("view-button").style.display="block";
-      }, 1000
-      );
+    } else {
+      try {
+        // Convert the selected image to base64
+        const base64Image = await convertImageToBase64(selectedImage);
   
+        // Create a JSON object with the "image" key and the Base64 image data as the value
+        const requestData = {
+          image: base64Image,
+        };
+  
+        // Send the JSON data to the backend API
+        const response = await axios.post('https://3.135.235.143.nip.io/api/predict/', requestData, {
+          headers: {
+            'Content-Type': 'application/json', // Set the content type to JSON
+          },
+        });
+  
+        // Capture and store the response in the component state
+        setResult(response.data); // Assuming the API response is a string
+        console.log(response.data);
+        setTimeout(() => {
+          document.getElementById("view-button").style.display = "block";
+        }, 1000);
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
-
   };
+  
 
   let timeout;
 
+  const createReport = async () => {
+    if (selectedImage == null) {
+      alert("Please upload an image!");
+    } else {
+      try {
+        const imageBase64 = await convertImageToBase64(selectedImage);
+
+        const xray_image = imageBase64;
+        const patient_id = document.getElementById("patientID").value;
+        const status = result.prediction;
+        console.log(xray_image);
+        console.log(patient_id);
+        console.log(status);
+
+        const response = await axios.post('https://3.135.235.143.nip.io/api/doctor/createReport/', 
+        {
+          xray_image: xray_image,
+          patient_id: patient_id,
+          status: status,
+        }, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        const capturerid = response.data.rid;
+        localStorage.setItem('selectedReportId', capturerid);
+        console.log('Create Report Response:', response.data);
+        navigate('/DoctorViewResult');
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+};
+  
+  // Function to convert an image URL to base64
+async function convertImageToBase64(imageURL) {
+  const response = await fetch(imageURL);
+  const blob = await response.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64Data = reader.result.split(',')[1]; // Extract the Base64 data
+      resolve(base64Data);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+
   const handleMouseEnter = () =>
   {
-
     clearTimeout(timeout);
     const dropdownContent = document.querySelector(".dropdown-content-menu");
     dropdownContent.style.display = "block";
     dropdownContent.classList.remove('hidden');
-
   };
 
   const handleMouseLeave = () =>
   {
-
     const dropdownContent = document.querySelector(".dropdown-content-menu");
     timeout = setTimeout(() => {
       dropdownContent.classList.add('hidden');
@@ -90,19 +150,15 @@ function DoctorUploadPage() {
         dropdownContent.style.display = "none";
       }, 300); // 1000 milliseconds = 1 second
     },200); // Adjust the delay time (1 second = 1000 milliseconds)
- 
   };
 
   const contentHandleMouseEnter = () =>
   {
-
     clearTimeout(timeout);
-
   };
 
   const contentHandleMouseLeave = () =>
   {
-
     const dropdownContent = document.querySelector(".dropdown-content-menu");
     const timeout = setTimeout(() => {
     dropdownContent.classList.add('hidden');
@@ -110,22 +166,18 @@ function DoctorUploadPage() {
     setTimeout(() => {
       dropdownContent.style.display = "none";
     }, 500); // 1000 milliseconds = 1 second
-    
   };
 
   const optionButtonHandleMouseEnter = () =>
   {
-
     clearTimeout(timeout);
     const dropdownContent = document.querySelector(".dropdown-content-option");
     dropdownContent.style.display = "block";
     dropdownContent.classList.remove('hidden');
-
   };
 
   const optionButtonHandleMouseLeave = () =>
   {
-
     const dropdownContent = document.querySelector(".dropdown-content-option");
     timeout = setTimeout(() => {
       dropdownContent.classList.add('hidden');
@@ -133,19 +185,15 @@ function DoctorUploadPage() {
         dropdownContent.style.display = "none";
       }, 300); // 1000 milliseconds = 1 second
     },200); // Adjust the delay time (1 second = 1000 milliseconds)
-
   };
 
   const optionHandleMouseEnter = () =>
   {
-
     clearTimeout(timeout);
-
   };
 
   const optionHandleMouseLeave = () =>
   {
-
     const dropdownContent = document.querySelector(".dropdown-content-option");
     const timeout = setTimeout(() => {
     dropdownContent.classList.add('hidden');
@@ -153,7 +201,6 @@ function DoctorUploadPage() {
     setTimeout(() => {
       dropdownContent.style.display = "none";
     }, 500); // 1000 milliseconds = 1 second
-    
   };
 
   const logout = () => {
@@ -262,15 +309,19 @@ function DoctorUploadPage() {
                 {/* Add a hidden input to include the selected image URL in the form */}
                 <input type="hidden" name="selectedImage" value={selectedImage || ''} />
                 <div className="button-container">
-                    <button className="analyze-button" onClick={checkNULL}>Analyze Image</button>
+                    <button className="analyze-button" onClick={analyzeIMG}>Analyze Image</button>
                 </div>
 
-                <div className="button-container">
+                {/*<div className="button-container">
                 <Link className="view_result_link"
                   to={"/DoctorViewResult"}
                   state={{image: selectedImage}}>
-                    <button id="view-button" className="view-button">View Results</button>
+                    <button id="view-button" className="view-button">Create Report</button>
                 </Link>
+              </div>*/}
+                
+                <div className="button-container">
+                  <button id="view-button" className="view-button" onClick={createReport}>Create Report</button>
                 </div>
               </form>
             </div>

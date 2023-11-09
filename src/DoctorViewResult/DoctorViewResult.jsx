@@ -17,6 +17,8 @@ function DoctorViewResult() {
     patient_age: '',
     description: '',
     status: '',
+    xray_image: '',
+    heatmap_image: ''
   });
 
   useEffect(() => {
@@ -34,6 +36,7 @@ function DoctorViewResult() {
       navigate('/DoctorMainPage');
     }
   }, [navigate, rid]);
+
 
   const fetchReportDetails = async (reportId, token) => {
     try {
@@ -54,6 +57,9 @@ function DoctorViewResult() {
     }
   };
 
+  // Assuming you have base64 strings for the X-ray image and heatmap image
+  const xrayImageDataUrl = `data:image/jpeg;base64,${reportDetails.xray_image}`;
+  const heatmapImageDataUrl = `data:image/jpeg;base64,${reportDetails.heatmap_image}`;
 
   //const { image } = location.state;
   const [comment, setComment] = useState('');
@@ -272,8 +278,12 @@ function DoctorViewResult() {
             <label className="image-box-label">Anomaly areas</label>
           </div>
           <div className='images-box'>
-          {/*<div><img src={image}  className='original-image'></img></div>
-            <div><img src={image}  className='anomaly-image'></img></div>*/}
+            <div className="image-container">
+              <img src={xrayImageDataUrl} className='original-image' alt="X-Ray Image" />
+            </div>
+            <div className="image-container">
+              <img src={heatmapImageDataUrl} className='anomaly-image' alt="Heatmap Image" />
+            </div>
           </div>
 
           {/* comment segment */}
