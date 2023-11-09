@@ -14,7 +14,7 @@ function PatientMainPage() {
       console.log(localStorage.getItem('token'));
       if (token) {
         try {
-          const response = await axios.get('http://3.135.235.143:8000/api/patient/report/', {
+          const response = await axios.get('https://3.135.235.143.nip.io/api/patient/report/', {
             headers: {
               'Authorization': `Bearer ${token}` // Use the token for authorization in the API call
             }

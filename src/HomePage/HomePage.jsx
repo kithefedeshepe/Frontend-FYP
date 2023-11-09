@@ -12,9 +12,8 @@ function HomePage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
     try {
-      const response = await Axios.post('http://3.135.235.143:8000/api/login/', {
+      const response = await Axios.post('https://3.135.235.143.nip.io/api/login/', {
         username,
         password,
       });
@@ -30,7 +29,7 @@ function HomePage() {
         console.log(`Token ${localStorage.getItem('token')}`);
         
         // USER AUTHENTICATION
-        const userResponse = await Axios.get('http://3.135.235.143:8000/api/userdetail/', {
+        const userResponse = await Axios.get('https://3.135.235.143.nip.io/api/userdetail/', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },

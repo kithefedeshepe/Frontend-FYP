@@ -51,7 +51,7 @@ function CreateAccountPage() {
             if (userType === 'doctor') {
               console.log(userType);
               console.log(fname, lname, phone, gender, age, email, specialization);
-              const docResponse = await Axios.post(`http://3.135.235.143:8000/api/signup/doctor/`, {
+              const docResponse = await Axios.post(`https://3.135.235.143.nip.io/api/signup/doctor/`, {
                 username: username,
                 password: password,
                 profile:{
@@ -74,7 +74,7 @@ function CreateAccountPage() {
               
             } else if (userType === 'patient') {
               console.log(userType);
-              const patResponse = await Axios.post(`http://3.135.235.143:8000/api/signup/patient/`, {
+              const patResponse = await Axios.post(`https://3.135.235.143.nip.io/api/signup/patient/`, {
                 username: username,
                 password: password,
                 profile:{
