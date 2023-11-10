@@ -129,13 +129,13 @@
   }
   
 /*TABLE */
-.table-container {
+  .table-container {
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
     padding: 0 30px; 
-    max-height: 400px; 
-    overflow-y: scroll;
+    max-height: auto; 
+    overflow: hidden;
   }
 
 
@@ -144,6 +144,7 @@
     border-collapse: collapse;
     width: 100%;
     border: 1px solid;
+    overflow: auto;
   }
   
 
