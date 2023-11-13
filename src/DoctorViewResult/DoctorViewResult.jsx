@@ -40,7 +40,7 @@ function DoctorViewResult() {
 
   const fetchReportDetails = async (reportId, token) => {
     try {
-      const response = await axios.get(`https://3.135.235.143.nip.io/api/doctor/getReport/${reportId}/`, {
+      const response = await axios.get(`http://43.134.34.32:8000/api/doctor/getReport/${reportId}/`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -84,7 +84,7 @@ function DoctorViewResult() {
     // If the comment is changed, proceed to submit it
     try {
       const reportId = rid || localStorage.getItem('selectedReportId');
-      const response = await axios.put(`https://3.135.235.143.nip.io/api/doctor/updateReport/${reportId}/`, {
+      const response = await axios.put(`http://43.134.34.32:8000/api/doctor/updateReport/${reportId}/`, {
         description: comment // Send the updated comment
       });
       

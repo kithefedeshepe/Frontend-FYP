@@ -8,6 +8,7 @@ function DoctorUploadPage() {
   const [selectedImage, setSelectedImage] = useState(null); // State to store the selected image
   const navigate = useNavigate()
   const [result, setResult] = useState(null);
+  const [heatmap, setHeatmap] = useState(null);
 
   useEffect(() => {
     // Check for the presence of a token in local storage
@@ -19,7 +20,23 @@ function DoctorUploadPage() {
   }, [navigate]);
   
   // Function to handle file input change
-  const handleImageChange = (event) =>
+  const handleImageChange = (event) => {
+    const file = event.target.files[0]; // Get the selected file
+  
+    if (file) {
+      if (file.type === "image/jpeg" || file.type === "image/jpg") {
+        const imageUrl = URL.createObjectURL(file); // Create a URL for the selected image
+        setSelectedImage(imageUrl); // Set the selected image URL in state
+      } else {
+        alert("Please upload a .jpg file.");
+        // You can optionally clear the selected image here
+        // setSelectedImage(null);
+      }
+    }
+  };
+
+  //ALLOW ALL FORMAT
+  /*const handleImageChange = (event) =>
   {
     const file = event.target.files[0]; // Get the selected file
     if (file)
@@ -27,7 +44,7 @@ function DoctorUploadPage() {
       const imageUrl = URL.createObjectURL(file); // Create a URL for the selected image
       setSelectedImage(imageUrl); // Set the selected image URL in state
     }
-  };
+  };*/
 
   const handleSubmit = (event) =>
   {
@@ -42,11 +59,11 @@ function DoctorUploadPage() {
 
   const analyzeIMG = async (e) => {
     e.preventDefault();
-  
     if (selectedImage == null || document.getElementById("patientID").value === "") {
       if (selectedImage == null) {
         alert("Please upload an image!");
       }
+      console.log(selectedImage);
       if (document.getElementById("patientID").value === "") {
         alert("Please fill in all fields!");
       }
@@ -60,19 +77,34 @@ function DoctorUploadPage() {
           image: base64Image,
         };
   
-        // Send the JSON data to the backend API
-        const response = await axios.post('https://3.135.235.143.nip.io/api/predict/', requestData, {
+        // Check if the image is an X-ray using the new API
+        const checkResponse = await axios.post('http://43.134.34.32:8000/api/lungClass/', requestData, {
           headers: {
             'Content-Type': 'application/json', // Set the content type to JSON
           },
         });
+        console.log('Check Response:', checkResponse.data.result);
+        if (checkResponse.data.result === "lung") {
+          // If the image is identified as an X-ray, proceed with the prediction API
+          const response = await axios.post('http://43.134.34.32:8000/api/predict/', requestData, {
+            headers: {
+              'Content-Type': 'application/json', // Set the content type to JSON
+            },
+          });
   
-        // Capture and store the response in the component state
-        setResult(response.data); // Assuming the API response is a string
-        console.log(response.data);
-        setTimeout(() => {
-          document.getElementById("view-button").style.display = "block";
-        }, 1000);
+          // Capture and store the response in the component state
+          setResult(response.data.prediction); // Assuming the API response is a string
+          // Store the heatmap_base64 in the heatmap state
+          setHeatmap(response.data.heatmap_base64);
+          
+          console.log(response.data);
+          setTimeout(() => {
+            document.getElementById("view-button").style.display = "block";
+          }, 1000);
+        } else {
+          // If the image is not identified as an X-ray, prompt the user to select an X-ray image
+          alert("Please select a Lung X-ray image.");
+        }
       } catch (error) {
         console.error('Error:', error);
       }
@@ -88,25 +120,30 @@ function DoctorUploadPage() {
     } else {
       try {
         const imageBase64 = await convertImageToBase64(selectedImage);
-
+  
         const xray_image = imageBase64;
         const patient_id = document.getElementById("patientID").value;
-        const status = result.prediction;
+        const status = result;
+        const heatmapData = heatmap; 
+  
         console.log(xray_image);
         console.log(patient_id);
         console.log(status);
-
-        const response = await axios.post('https://3.135.235.143.nip.io/api/doctor/createReport/', 
+        console.log(heatmapData);
+  
+        const response = await axios.post('http://43.134.34.32:8000/api/doctor/createReport/', 
         {
           xray_image: xray_image,
           patient_id: patient_id,
           status: status,
+          heatmap_image: heatmapData 
         }, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
+          timeout: 60000,
         });
-
+  
         const capturerid = response.data.rid;
         localStorage.setItem('selectedReportId', capturerid);
         console.log('Create Report Response:', response.data);
@@ -115,9 +152,10 @@ function DoctorUploadPage() {
         console.error('Error:', error);
       }
     }
-};
+  };
   
-  // Function to convert an image URL to base64
+  
+// Function to convert an image URL to base64
 async function convertImageToBase64(imageURL) {
   const response = await fetch(imageURL);
   const blob = await response.blob();
@@ -270,7 +308,6 @@ async function convertImageToBase64(imageURL) {
                       alt="Selected X-ray"/>
                       )
                   }
-
             </div>
             
             {/* Right Box for Entering Patient Information */}
@@ -281,44 +318,11 @@ async function convertImageToBase64(imageURL) {
                   <label className='lable-info' htmlFor="patientID">ID :</label>
                   <input className='input-info' type="text" id="patientID" name="patientID" />
                 </div>
-                   {/* Right Box for Entering Patient Information 
-                <div className='info-row'>
-                  <label className='lable-info' htmlFor="patientName">First Name :</label>
-                  <input className='input-info' type="text" id="p-firstName" name="patientName" />
-                </div>
-
-                <div className='info-row'>
-                  <label className='lable-info' htmlFor="patientName">Last Name :</label>
-                  <input className='input-info' type="text" id="p-lastName" name="patientName" />
-                </div>
-
-                <div className='info-row'>
-                  <label className='lable-info' htmlFor="patientGender">Gender :</label>
-                  <select className='input-info' id="patientGender" name="patientGender">
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                  </select>
-                </div>
-
-                <div className='info-row'>
-                  <label className='lable-info' htmlFor="patientAge">Age :</label>
-                  <input className='input-info' type="number" id="patientAge" name="patientAge" />
-                </div>
-                */}
-
-                {/* Add a hidden input to include the selected image URL in the form */}
+                
                 <input type="hidden" name="selectedImage" value={selectedImage || ''} />
                 <div className="button-container">
                     <button className="analyze-button" onClick={analyzeIMG}>Analyze Image</button>
                 </div>
-
-                {/*<div className="button-container">
-                <Link className="view_result_link"
-                  to={"/DoctorViewResult"}
-                  state={{image: selectedImage}}>
-                    <button id="view-button" className="view-button">Create Report</button>
-                </Link>
-              </div>*/}
                 
                 <div className="button-container">
                   <button id="view-button" className="view-button" onClick={createReport}>Create Report</button>

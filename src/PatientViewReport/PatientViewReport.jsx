@@ -40,7 +40,7 @@ function PatientViewReport() {
 
   const fetchReportDetails = async (reportId, token) => {
     try {
-      const response = await axios.get(`https://3.135.235.143.nip.io/api/patient/getReport/${reportId}/`, {
+      const response = await axios.get(`http://43.134.34.32:8000/api/patient/getReport/${reportId}/`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
