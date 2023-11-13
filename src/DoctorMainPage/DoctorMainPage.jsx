@@ -15,7 +15,7 @@ function DoctorMainPage() {
       console.log(localStorage.getItem('token'));
       if (token) {
         try {
-          const response = await axios.get('http://43.134.34.32:8000/api/doctor/report/', {
+          const response = await axios.get('https://43.134.34.32.nip.io/api/doctor/report/', {
             headers: {
               'Authorization': `Bearer ${token}` // Use the token for authorization in the API call
             }
@@ -122,8 +122,8 @@ function DoctorMainPage() {
   
     try {
       // Then attempt to update the server
-      console.log(`https://3.23.112.105.nip.io/api/report/${rid}/`);
-      await axios.put(`https://3.23.112.105.nip.io/api/report/${rid}/`, {
+      console.log(`https://43.134.34.32.nip.io/api/report/${rid}/`);
+      await axios.put(`https://43.134.34.32.nip.io/api/report/${rid}/`, {
         visibility: newVisibility
       }, {
         headers: {

@@ -20,7 +20,7 @@ function DoctorUploadPage() {
   }, [navigate]);
   
   // Function to handle file input change
-  const handleImageChange = (event) => {
+  /*const handleImageChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
   
     if (file) {
@@ -33,10 +33,10 @@ function DoctorUploadPage() {
         // setSelectedImage(null);
       }
     }
-  };
+  };*/
 
   //ALLOW ALL FORMAT
-  /*const handleImageChange = (event) =>
+  const handleImageChange = (event) =>
   {
     const file = event.target.files[0]; // Get the selected file
     if (file)
@@ -44,7 +44,7 @@ function DoctorUploadPage() {
       const imageUrl = URL.createObjectURL(file); // Create a URL for the selected image
       setSelectedImage(imageUrl); // Set the selected image URL in state
     }
-  };*/
+  };
 
   const handleSubmit = (event) =>
   {
@@ -78,7 +78,7 @@ function DoctorUploadPage() {
         };
   
         // Check if the image is an X-ray using the new API
-        const checkResponse = await axios.post('http://43.134.34.32:8000/api/lungClass/', requestData, {
+        const checkResponse = await axios.post('https://43.134.34.32.nip.io/api/lungClass/', requestData, {
           headers: {
             'Content-Type': 'application/json', // Set the content type to JSON
           },
@@ -86,7 +86,7 @@ function DoctorUploadPage() {
         console.log('Check Response:', checkResponse.data.result);
         if (checkResponse.data.result === "lung") {
           // If the image is identified as an X-ray, proceed with the prediction API
-          const response = await axios.post('http://43.134.34.32:8000/api/predict/', requestData, {
+          const response = await axios.post('https://43.134.34.32.nip.io/api/predict/', requestData, {
             headers: {
               'Content-Type': 'application/json', // Set the content type to JSON
             },
@@ -131,7 +131,7 @@ function DoctorUploadPage() {
         console.log(status);
         console.log(heatmapData);
   
-        const response = await axios.post('http://43.134.34.32:8000/api/doctor/createReport/', 
+        const response = await axios.post('https://43.134.34.32.nip.io/api/doctor/createReport/', 
         {
           xray_image: xray_image,
           patient_id: patient_id,
