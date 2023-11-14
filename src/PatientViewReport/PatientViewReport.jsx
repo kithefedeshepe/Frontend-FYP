@@ -154,17 +154,6 @@ function PatientViewReport() {
       
     };
 
-    /*const printDiv = () =>
-    {
-      var printContents = document.getElementById('print-content').innerHTML;
-      var w=window.open();
-      w.document.write(printContents);
-      w.print();
-      localStorage.removeItem('selectedReportId');
-      w.close();
-    };*/
-
-    //WORKING 
     const printDiv = () => {
       const pdf = new jsPDF();
     
@@ -191,7 +180,7 @@ function PatientViewReport() {
       }
     
       pdf.text('Doctor\'s comment: ' + reportDetails.description, 15, 165);
-    
+      
       // Save the PDF
       pdf.save('example.pdf');
     };

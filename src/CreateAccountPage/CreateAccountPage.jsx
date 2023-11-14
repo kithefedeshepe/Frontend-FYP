@@ -22,6 +22,7 @@ function CreateAccountPage() {
     };
 
     const checkAndSubmit = async (e) => {
+        setUserType('patient');
         e.preventDefault(); 
         const fname = document.getElementById("p-firstName").value;
         const lname = document.getElementById("p-lastName").value;
@@ -32,15 +33,13 @@ function CreateAccountPage() {
         const phone = document.getElementById("phone").value;
         const username = document.getElementById("username").value;
         const gender = document.getElementById("gender").value;
-        const if_doc_checked = document.getElementById("doctorCheckbox").checked;
-        const if_pat_checked = document.getElementById("patientCheckbox").checked;
+        //const if_doc_checked = document.getElementById("doctorCheckbox").checked;
+        const if_pat_checked = userType;
         const specialization = document.getElementById("specialization").value;
 
-        
-
-        if (!userType) {
+        /*if (!userType) {
           alert('Please select a user type (Doctor or Patient)');
-        } else if (fname === '' || lname === '' || age === '' || email === '' || password === '') {
+        } else*/ if (fname === '' || lname === '' || age === '' || email === '' || password === '') {
           alert('Please fill in all fields!');
         } else if (!/^[A-Za-z]+$/.test(fname) || !/^[A-Za-z]+$/.test(lname)) {
           alert('First name and last name should only contain alphabets!');
@@ -118,7 +117,7 @@ function CreateAccountPage() {
     <div className="create-account-box">
 
         <h2 className="create-info-title">Your Information</h2>
-            <div className="role-box">
+            {/*<div className="role-box">
                 <div className='role-font'>
                     <b>Doctor: </b>
                     <input className="role-check" onClick={doctor_checked} type="radio" id="doctorCheckbox" />
@@ -129,7 +128,7 @@ function CreateAccountPage() {
                     <b>Patient: </b>
                     <input className="role-check" onClick={patient_checked} type="radio" id="patientCheckbox"  />
                 </div>
-            </div>
+            </div>*/}
 
               <form >      
               
