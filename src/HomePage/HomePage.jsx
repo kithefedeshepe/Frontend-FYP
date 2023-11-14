@@ -12,6 +12,12 @@ function HomePage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Check if username or password is empty
+    if (!username || !password) {
+      alert('Please enter both username and password');
+      return; // Exit the function if fields are empty
+    }
     try {
       const response = await Axios.post('https://43.134.34.32.nip.io/api/login/', {
         username,
