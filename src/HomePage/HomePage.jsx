@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,12 @@ function HomePage() {
   const navigate = useNavigate(); // Initialize navigate for routing
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  // Clear localStorage items on component mount
+  useEffect(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('selectedReportId');
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
