@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PatientViewReport.css'; // Import your CSS file
+import jsPDF from 'jspdf';
 
 function PatientViewReport() {
   const navigate = useNavigate()
@@ -153,7 +154,7 @@ function PatientViewReport() {
       
     };
 
-    const printDiv = () =>
+    /*const printDiv = () =>
     {
       var printContents = document.getElementById('print-content').innerHTML;
       var w=window.open();
@@ -161,6 +162,38 @@ function PatientViewReport() {
       w.print();
       localStorage.removeItem('selectedReportId');
       w.close();
+    };*/
+
+    //WORKING 
+    const printDiv = () => {
+      const pdf = new jsPDF();
+    
+      // Add content to the PDF
+      pdf.text('COVID 19 X-Ray analysis report', 15, 15);
+      
+      pdf.text('Patient ID: ' + reportDetails.patient_id, 15, 30);
+      pdf.text('First Name: ' + reportDetails.patient_first_name, 15, 45);
+      pdf.text('Last Name: ' + reportDetails.patient_last_name, 15, 60);
+      pdf.text('Gender: ' + reportDetails.patient_gender, 15, 75);
+      pdf.text('Age: ' + reportDetails.patient_age, 15, 90);
+      
+      pdf.text('Doctor ID: ' + reportDetails.doctor_id, 15, 105);
+      pdf.text('Doctor First Name: ' + reportDetails.doctor_first_name, 15, 120);
+      pdf.text('Doctor Last Name: ' + reportDetails.doctor_last_name, 15, 135);
+      
+      // Set checkboxes based on the diagnosis status
+      if (reportDetails.status === 'Normal') {
+        pdf.text('Diagnosis: Negative', 15, 150);
+      } else if (reportDetails.status === 'COVID') {
+        pdf.text('Diagnosis: Positive', 15, 150);
+      } else if (reportDetails.status === 'Viral Pneumonia') {
+        pdf.text('Diagnosis: Viral Pneumonia', 15, 150);
+      }
+    
+      pdf.text('Doctor\'s comment: ' + reportDetails.description, 15, 165);
+    
+      // Save the PDF
+      pdf.save('example.pdf');
     };
 
     const logout = () => {
