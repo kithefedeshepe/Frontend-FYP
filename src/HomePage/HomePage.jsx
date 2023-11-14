@@ -50,7 +50,7 @@ function HomePage() {
         alert('Invalid username or password');
       }
     } catch (error) {
-      alert('An error occurred during login. Please try again.');
+      alert('Wrong Username or Password please re-enter');
       console.error(error);
     }
 
