@@ -98,7 +98,7 @@ function CreateAccountPage() {
             }
           } catch (error) {
             console.error('AxiosError:', error);
-            alert('An error occurred while creating the account.');
+            alert('Account already exist');
           }
         }
     };
