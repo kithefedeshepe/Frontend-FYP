@@ -209,7 +209,7 @@ function PatientViewReport() {
       addTextWithBorders('Doctor\'s comment: ' + reportDetails.description, 15, 165, maxWidth, fontSize);
     
       // Save the PDF
-      pdf.save('example.pdf');
+      pdf.save('covidReport.pdf');
     };
 
 
