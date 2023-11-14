@@ -34,7 +34,7 @@ function PatientViewReport() {
       fetchReportDetails(reportId, token);
     } else {
       alert('No report selected.');
-      navigate('/DoctorMainPage');
+      navigate('/PatientMainPage');
     }
   }, [navigate, rid]);
 
