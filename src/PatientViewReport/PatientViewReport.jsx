@@ -157,19 +157,40 @@ function PatientViewReport() {
     const printDiv = () => {
       const pdf = new jsPDF();
     
+      // Function to handle long comments and add page borders
+      const addTextWithBorders = (text, x, y, maxWidth, lineHeight) => {
+        const words = text.split(' ');
+        let line = '';
+        
+        for (let i = 0; i < words.length; i++) {
+          const testLine = line + words[i] + ' ';
+          const testWidth = pdf.getStringUnitWidth(testLine) * fontSize;
+    
+          if (testWidth > maxWidth) {
+            pdf.text(line, x, y);
+            line = words[i] + ' ';
+            y += lineHeight;
+          } else {
+            line = testLine;
+          }
+        }
+        
+        pdf.text(line, x, y);
+      };
+    
       // Add content to the PDF
       pdf.text('COVID 19 X-Ray analysis report', 15, 15);
-      
+    
       pdf.text('Patient ID: ' + reportDetails.patient_id, 15, 30);
       pdf.text('First Name: ' + reportDetails.patient_first_name, 15, 45);
       pdf.text('Last Name: ' + reportDetails.patient_last_name, 15, 60);
       pdf.text('Gender: ' + reportDetails.patient_gender, 15, 75);
       pdf.text('Age: ' + reportDetails.patient_age, 15, 90);
-      
+    
       pdf.text('Doctor ID: ' + reportDetails.doctor_id, 15, 105);
       pdf.text('Doctor First Name: ' + reportDetails.doctor_first_name, 15, 120);
       pdf.text('Doctor Last Name: ' + reportDetails.doctor_last_name, 15, 135);
-      
+    
       // Set checkboxes based on the diagnosis status
       if (reportDetails.status === 'Normal') {
         pdf.text('Diagnosis: Negative', 15, 150);
@@ -179,11 +200,18 @@ function PatientViewReport() {
         pdf.text('Diagnosis: Viral Pneumonia', 15, 150);
       }
     
-      pdf.text('Doctor\'s comment: ' + reportDetails.description, 15, 165);
-      
+      // Set font size and maximum width for comments
+      const fontSize = 12;
+      const maxWidth = 390;
+    
+      // Add doctor's comment with line breaks and borders
+      pdf.rect(10, 160, 190, 90); // Adjust the height to provide more room
+      addTextWithBorders('Doctor\'s comment: ' + reportDetails.description, 15, 165, maxWidth, fontSize);
+    
       // Save the PDF
       pdf.save('example.pdf');
     };
+
 
     const logout = () => {
       // Clear the token from local storage
