@@ -65,7 +65,7 @@ function DoctorUploadPage() {
       }
       console.log(selectedImage);
       if (document.getElementById("patientID").value === "") {
-        alert("Please fill in all fields!");
+        alert("Please fill in patient ID!");
       }
     } else {
       try {
