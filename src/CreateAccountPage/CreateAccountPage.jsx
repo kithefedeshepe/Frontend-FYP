@@ -42,6 +42,8 @@ function CreateAccountPage() {
           alert('Please select a user type (Doctor or Patient)');
         } else if (fname === '' || lname === '' || age === '' || email === '' || password === '') {
           alert('Please fill in all fields!');
+        } else if (!/^[A-Za-z]+$/.test(fname) || !/^[A-Za-z]+$/.test(lname)) {
+          alert('First name and last name should only contain alphabets!');
         } else if (password !== confirm_password) {
           alert('Password does not match!');
         } else if (userType === 'doctor' && specialization === '') {
@@ -101,6 +103,14 @@ function CreateAccountPage() {
         }
     };
 
+    const handlePhoneInput = (e) => {
+      // Allow only numeric characters
+      let inputValue = e.target.value.replace(/[^0-9]/g, '');
+      // Limit to 10 digits
+      inputValue = inputValue.slice(0, 10);
+      e.target.value = inputValue;
+    };
+
   return (
   
     <body className='body'>
@@ -153,7 +163,15 @@ function CreateAccountPage() {
 
                 <div className='info-row'>
                   <label className='lable-info' htmlFor="phone">Phone :</label>
-                  <input className='input-info' id="phone" name="phone"/>
+                  <input
+                    className='input-info'
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    pattern="[0-9]+"
+                    maxLength="10"
+                    onInput={handlePhoneInput}
+                  />
                 </div>
 
                 <div className='info-row'>
