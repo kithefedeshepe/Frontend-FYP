@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './PatientViewReport.css'; // Import your CSS file
+import './PatientViewReport.css'; 
 import jsPDF from 'jspdf';
 
 function PatientViewReport() {
@@ -205,7 +205,7 @@ function PatientViewReport() {
       const maxWidth = 390;
     
       // Add doctor's comment with line breaks and borders
-      pdf.rect(10, 160, 190, 90); // Adjust the height to provide more room
+      pdf.rect(10, 160, 190, 90); 
       addTextWithBorders('Doctor\'s comment: ' + reportDetails.description, 15, 165, maxWidth, fontSize);
     
       // Save the PDF

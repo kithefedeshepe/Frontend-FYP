@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './DoctorViewResult.css'; // Import your CSS file
+import './DoctorViewResult.css'; 
 
 function DoctorViewResult() {
   const navigate = useNavigate();
@@ -57,7 +57,6 @@ function DoctorViewResult() {
     }
   };
 
-  // Assuming you have base64 strings for the X-ray image and heatmap image
   const xrayImageDataUrl = `data:image/jpeg;base64,${reportDetails.xray_image}`;
   const heatmapImageDataUrl = `data:image/jpeg;base64,${reportDetails.heatmap_image}`;
 

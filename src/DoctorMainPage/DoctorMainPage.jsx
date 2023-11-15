@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import './DoctorMainPage.css'; // Import your CSS file
+import './DoctorMainPage.css'; 
 
 function DoctorMainPage() {
 
@@ -121,7 +121,7 @@ function DoctorMainPage() {
     ));
   
     try {
-      // Then attempt to update the server
+      // attempt to update the server
       //console.log(`https://43.134.34.32.nip.io/api/report/${rid}/`);
       await axios.put(`https://43.134.34.32.nip.io/api/report/${rid}/`, {
         visibility: newVisibility

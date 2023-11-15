@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './DoctorUploadPage.css'; // Import your CSS file
+import './DoctorUploadPage.css'; 
 
 function DoctorUploadPage() {
   //const [reports, setReports] = useState([]); // Initialize an empty array for reports
@@ -14,7 +14,7 @@ function DoctorUploadPage() {
     // Check for the presence of a token in local storage
     const token = localStorage.getItem('token');
     if (!token) {
-      // If no token is found, navigate to the login page or any other page you prefer
+      // If no token is found, navigate to the login page or any other page 
       navigate('/');
     }
   }, [navigate]);
@@ -29,7 +29,7 @@ function DoctorUploadPage() {
         setSelectedImage(imageUrl); // Set the selected image URL in state
       } else {
         alert("Please upload a .jpg file.");
-        // You can optionally clear the selected image here
+        
         // setSelectedImage(null);
       }
     }
@@ -52,7 +52,7 @@ function DoctorUploadPage() {
     // Access form data and selected image URL
     const formData = new FormData(event.target);
     const selectedImageURL = formData.get('selectedImage');
-    // Now you can access formData to send it to your server or perform other actions
+    
     //console.log('Form Data:', formData);
     //console.log('Selected Image URL:', selectedImageURL);
   };
