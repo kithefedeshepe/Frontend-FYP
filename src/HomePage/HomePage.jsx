@@ -31,14 +31,14 @@ function HomePage() {
       });
       
       if (response.status === 200) {
-        console.log(response.data);
+        //console.log(response.data);
 
         // Extract the token from the response
         const token = response.data.token;
         // Store the token in localStorage
         localStorage.setItem('token', token);
-        console.log('Token:', token);
-        console.log(`Token ${localStorage.getItem('token')}`);
+        //console.log('Token:', token);
+        //console.log(`Token ${localStorage.getItem('token')}`);
         
         // USER AUTHENTICATION
         const userResponse = await Axios.get('https://43.134.34.32.nip.io/api/userdetail/', {
@@ -48,14 +48,14 @@ function HomePage() {
         });
 
         // Successful login
-        console.log(localStorage.getItem('token'));
-        console.log(userResponse.data.role);
+        //console.log(localStorage.getItem('token'));
+        //console.log(userResponse.data.role);
         if (userResponse.data.role === 'doctor') {
           navigate('/DoctorMainPage'); // Redirect to the Doctor Page
         } else if (userResponse.data.role === 'patient') {
           navigate('/PatientMainPage'); // Redirect to the Patient Page
         } else {
-          console.log(userResponse.data);
+          //console.log(userResponse.data);
           alert('Invalid username or password');
         }
       } else {

@@ -34,10 +34,10 @@ function CreateAccountPage() {
         const username = document.getElementById("username").value;
         const gender = document.getElementById("gender").value;
         //const if_doc_checked = document.getElementById("doctorCheckbox").checked;
-        const if_pat_checked = userType;
+        const if_pat_checked = userType;//KIV 
         const specialization = document.getElementById("specialization").value;
 
-        /*if (!userType) {
+        /*if (!userType) {   //KIV
           alert('Please select a user type (Doctor or Patient)');
         } else*/ if (fname === '' || lname === '' || age === '' || email === '' || password === '') {
           alert('Please fill in all fields!');

@@ -19,7 +19,7 @@ function DoctorUploadPage() {
     }
   }, [navigate]);
   
-  // Function to handle file input change
+  // Function to handle file input change only jpg allowed
   /*const handleImageChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
   
@@ -53,8 +53,8 @@ function DoctorUploadPage() {
     const formData = new FormData(event.target);
     const selectedImageURL = formData.get('selectedImage');
     // Now you can access formData to send it to your server or perform other actions
-    console.log('Form Data:', formData);
-    console.log('Selected Image URL:', selectedImageURL);
+    //console.log('Form Data:', formData);
+    //console.log('Selected Image URL:', selectedImageURL);
   };
 
   const analyzeIMG = async (e) => {
@@ -63,7 +63,7 @@ function DoctorUploadPage() {
       if (selectedImage == null) {
         alert("Please upload an image!");
       }
-      console.log(selectedImage);
+      //console.log(selectedImage);
       if (document.getElementById("patientID").value === "") {
         alert("Please fill in patient ID!");
       }
@@ -83,7 +83,7 @@ function DoctorUploadPage() {
             'Content-Type': 'application/json', // Set the content type to JSON
           },
         });
-        console.log('Check Response:', checkResponse.data.result);
+        //console.log('Check Response:', checkResponse.data.result);
         if (checkResponse.data.result === "lung") {
           // If the image is identified as an X-ray, proceed with the prediction API
           const response = await axios.post('https://43.134.34.32.nip.io/api/predict/', requestData, {
@@ -97,7 +97,7 @@ function DoctorUploadPage() {
           // Store the heatmap_base64 in the heatmap state
           setHeatmap(response.data.heatmap_base64);
           
-          console.log(response.data);
+          //console.log(response.data);
           setTimeout(() => {
             document.getElementById("view-button").style.display = "block";
           }, 1000);
@@ -126,10 +126,10 @@ function DoctorUploadPage() {
         const status = result;
         const heatmapData = heatmap; 
   
-        console.log(xray_image);
-        console.log(patient_id);
-        console.log(status);
-        console.log(heatmapData);
+        //console.log(xray_image);
+        //console.log(patient_id);
+        //console.log(status);
+        //console.log(heatmapData);
   
         const response = await axios.post('https://43.134.34.32.nip.io/api/doctor/createReport/', 
         {
@@ -146,7 +146,7 @@ function DoctorUploadPage() {
   
         const capturerid = response.data.rid;
         localStorage.setItem('selectedReportId', capturerid);
-        console.log('Create Report Response:', response.data);
+        //console.log('Create Report Response:', response.data);
         navigate('/DoctorViewResult');
       } catch (error) {
         console.error('Error:', error);

@@ -12,7 +12,7 @@ function DoctorMainPage() {
   useEffect(() => {
     const fetchReports = async () => {
       const token = localStorage.getItem('token'); // Retrieve the token from localStorage
-      console.log(localStorage.getItem('token'));
+      //console.log(localStorage.getItem('token'));
       if (token) {
         try {
           const response = await axios.get('https://43.134.34.32.nip.io/api/doctor/report/', {
@@ -122,7 +122,7 @@ function DoctorMainPage() {
   
     try {
       // Then attempt to update the server
-      console.log(`https://43.134.34.32.nip.io/api/report/${rid}/`);
+      //console.log(`https://43.134.34.32.nip.io/api/report/${rid}/`);
       await axios.put(`https://43.134.34.32.nip.io/api/report/${rid}/`, {
         visibility: newVisibility
       }, {
