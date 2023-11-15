@@ -150,6 +150,7 @@ function DoctorUploadPage() {
         navigate('/DoctorViewResult');
       } catch (error) {
         console.error('Error:', error);
+        alert("Please select a valid patient ID");
       }
     }
   };
